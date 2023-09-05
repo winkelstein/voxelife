@@ -16,6 +16,8 @@ SET(SOURCE_FILES
         src/Engine/GLTK/Shader.cpp
         src/Engine/Screen.cpp
         src/Engine/Camera.cpp
+        src/Engine/Mesh.cpp
+        src/Engine/Model.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
