@@ -1,6 +1,8 @@
 # project files
 debug.log
 .vscode
+biolife
+build/
 
 # Prerequisites
 *.d

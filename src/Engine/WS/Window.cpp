@@ -1,0 +1,46 @@
+#include "Window.h"
+#include <stdexcept>
+
+Engine::WS::Window::Window(std::string window_name, int width, int height)
+{
+    if (!glfwInit())
+    {
+        throw std::runtime_error("Failed to initialize GLFW");
+    }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+    this->window = glfwCreateWindow(width, height, window_name.c_str(), nullptr, nullptr);
+    if (this->window == nullptr)
+        throw std::runtime_error("Failed to create GLFW window");
+    glfwMakeContextCurrent(this->window);
+
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK)
+    {
+        throw std::runtime_error("Failed to initialize GLEW");
+    }
+}
+
+Engine::WS::Window::~Window()
+{
+    glfwTerminate();
+}
+
+void Engine::WS::Window::swapBuffers()
+{
+    glfwSwapBuffers(this->window);
+}
+
+void Engine::WS::Window::pollEvent()
+{
+    glfwPollEvents();
+}
+
+bool Engine::WS::Window::isOpen()
+{
+    return !glfwWindowShouldClose(this->window);
+}
