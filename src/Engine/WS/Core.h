@@ -17,11 +17,12 @@ namespace Engine
 
         struct Position
         {
-            uint64_t x, y;
-            Position(uint64_t x, uint64_t)
+            uint64_t x, y, z;
+            Position(uint64_t x, uint64_t y, uint64_t z = 0)
             {
                 this->x = x;
                 this->y = y;
+                this->z = z;
             }
         };
     }
