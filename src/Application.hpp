@@ -11,6 +11,12 @@
 #include <ObscureEngine/Importer/ShaderImporter.h>
 #include <ObscureEngine/Logger.h>
 
+#ifdef _RELEASE
+#define SHADER_PATH std::string("shaders/")
+#else
+#define SHADER_PATH std::string("../shaders/")
+#endif // _DEBUG
+
 using Engine::FPSCounter;
 using Engine::Logger;
 using Engine::gltk::Shader;
@@ -45,8 +51,8 @@ void Application::assets_init()
 {
     using namespace Engine::Importer;
     ShaderImporter shader_importer;
-    shader_importer.add(ShaderImporter::ShaderType::vertex, "../shaders/default/vertex.glsl");
-    shader_importer.add(ShaderImporter::ShaderType::fragment, "../shaders/default/fragment.glsl");
+    shader_importer.add(ShaderImporter::ShaderType::vertex, SHADER_PATH + "/default/vertex.glsl");
+    shader_importer.add(ShaderImporter::ShaderType::fragment, SHADER_PATH + "/default/fragment.glsl");
 
     auto shader = shader_importer.import();
     this->logger << Logger::message("Assets", "Default shader has been imported successfully");

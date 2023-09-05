@@ -3,30 +3,20 @@ project(biolife
         VERSION 0.1.0
         LANGUAGES CXX)
 
-SET(CMAKE_CXX_STANDARD 17)
-        
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -Werror -Wextra")
+set(CMAKE_CXX_FLAGS_RELEASE_INIT "-Wall -D _RELEASE -O2")
+
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
 
 include_directories(src/ObscureEngine/include)
 
-SET(SOURCE_FILES
-        src/main.cpp
-)
-
-SET(OBSCURE_SOURCE_FILES
-        src/ObscureEngine/src/FPSCounter.cpp
-        src/ObscureEngine/src/Window.cpp
-        src/ObscureEngine/src/Shader.cpp
-        src/ObscureEngine/src/Screen.cpp
-        src/ObscureEngine/src/Camera.cpp
-        src/ObscureEngine/src/Mesh.cpp
-        src/ObscureEngine/src/Model.cpp
-        src/ObscureEngine/src/EngineApp.cpp
-        src/ObscureEngine/src/Logger.cpp
-        src/ObscureEngine/src/ShaderImporter.cpp
-        )
+file(GLOB
+        SOURCE_FILES "src/*.cpp")
+file(GLOB
+        OBSCURE_SOURCE_FILES "src/ObscureEngine/src/*.cpp")
 
 add_library(obscureengine SHARED ${OBSCURE_SOURCE_FILES})
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
