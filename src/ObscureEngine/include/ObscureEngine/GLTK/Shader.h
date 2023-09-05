@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 
 #include "GLObject.h"
+#include "../Importer/Importer.h"
 
 namespace Engine
 {
@@ -34,24 +35,15 @@ namespace Engine
             };
 
         private:
-            GLuint shaders[6];
-
             std::vector<Uniform> uniforms;
 
         private:
-            static std::string getSourceFromFile(std::filesystem::path pathToFile);
-            static GLuint compileShader(std::string src, ShaderType type);
-
             void getUniforms();
             Uniform findUniform(std::string name);
 
         public:
-            Shader();
+            Shader(GLuint handler);
             ~Shader();
-
-        public:
-            void add(ShaderType type, std::filesystem::path pathToFile);
-            void link();
 
         public:
             // UNSAFE! For better optimization bind function does not check link status

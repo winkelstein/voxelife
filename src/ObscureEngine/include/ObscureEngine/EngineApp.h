@@ -24,7 +24,6 @@ namespace Engine
     protected:
         static void _debugfunc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char *message, const void *classptr);
         void window_init(std::string name, int width, int height);
-        virtual void assets_init() {}
         virtual void draw() {}
     };
 }

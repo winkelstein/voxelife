@@ -13,16 +13,6 @@ Engine::EngineApp::EngineApp(std::string window_name, int width, int height, int
     }
     this->logger << Logger::message("Window System (WS)", "Window has been successfully created");
 
-    try
-    {
-        this->assets_init();
-    }
-    catch (std::exception &e)
-    {
-        this->logger << Logger::message("Assets", e.what());
-    }
-    this->logger << Logger::message("Assets", "Assets has been successfully loaded");
-
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(EngineApp::_debugfunc, &this->logger);
 }

@@ -24,7 +24,9 @@ SET(OBSCURE_SOURCE_FILES
         src/ObscureEngine/src/Mesh.cpp
         src/ObscureEngine/src/Model.cpp
         src/ObscureEngine/src/EngineApp.cpp
-        src/ObscureEngine/src/Logger.cpp)
+        src/ObscureEngine/src/Logger.cpp
+        src/ObscureEngine/src/ShaderImporter.cpp
+        )
 
 add_library(obscureengine SHARED ${OBSCURE_SOURCE_FILES})
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
