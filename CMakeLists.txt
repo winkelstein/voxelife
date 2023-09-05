@@ -18,6 +18,8 @@ SET(SOURCE_FILES
         src/Engine/Camera.cpp
         src/Engine/Mesh.cpp
         src/Engine/Model.cpp
+        src/Engine/EngineApp.cpp
+        src/Engine/Logger.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
