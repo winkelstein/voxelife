@@ -1,4 +1,4 @@
-#include "Logger.h"
+#include "../include/ObscureEngine/Logger.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>

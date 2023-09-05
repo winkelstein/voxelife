@@ -1,4 +1,4 @@
-#include "Screen.h"
+#include "../include/ObscureEngine/Screen.h"
 #include <cstring>
 
 Engine::Screen::Screen(const WS::Size size)

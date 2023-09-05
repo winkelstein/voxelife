@@ -4,10 +4,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Engine/GLTK/Shader.h"
-#include "Engine/FPSCounter.h"
+#include <ObscureEngine/GLTK/Shader.h>
+#include <ObscureEngine/FPSCounter.h>
 
-#include "Engine/EngineApp.h"
+#include <ObscureEngine/EngineApp.h>
 
 using Engine::FPSCounter;
 using Engine::gltk::Shader;

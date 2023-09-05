@@ -1,4 +1,4 @@
-#include "FPSCounter.h"
+#include "../include/ObscureEngine/FPSCounter.h"
 
 Engine::FPSCounter::FPSCounter() : m_ticks(0.1) {}
 

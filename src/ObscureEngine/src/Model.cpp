@@ -1,4 +1,4 @@
-#include "Model.h"
+#include "../include/ObscureEngine/Model.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 Engine::Model::Model(std::vector<std::shared_ptr<const Mesh>> meshes) : meshes(meshes)

@@ -1,4 +1,4 @@
-#include "Shader.h"
+#include "../include/ObscureEngine/GLTK/Shader.h"
 #include <cstring>
 
 std::string Engine::gltk::Shader::getSourceFromFile(std::filesystem::path pathToFile)

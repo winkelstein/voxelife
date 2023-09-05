@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "../include/ObscureEngine/WS/Window.h"
 #include <stdexcept>
 
 Engine::WS::Window::Window(std::string window_name, int width, int height)

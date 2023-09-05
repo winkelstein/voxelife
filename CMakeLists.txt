@@ -8,19 +8,24 @@ SET(CMAKE_CXX_STANDARD 17)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
-        
+
+include_directories(src/ObscureEngine/include)
+
 SET(SOURCE_FILES
         src/main.cpp
-        src/Engine/FPSCounter.cpp
-        src/Engine/WS/Window.cpp
-        src/Engine/GLTK/Shader.cpp
-        src/Engine/Screen.cpp
-        src/Engine/Camera.cpp
-        src/Engine/Mesh.cpp
-        src/Engine/Model.cpp
-        src/Engine/EngineApp.cpp
-        src/Engine/Logger.cpp
 )
 
+SET(OBSCURE_SOURCE_FILES
+        src/ObscureEngine/src/FPSCounter.cpp
+        src/ObscureEngine/src/Window.cpp
+        src/ObscureEngine/src/Shader.cpp
+        src/ObscureEngine/src/Screen.cpp
+        src/ObscureEngine/src/Camera.cpp
+        src/ObscureEngine/src/Mesh.cpp
+        src/ObscureEngine/src/Model.cpp
+        src/ObscureEngine/src/EngineApp.cpp
+        src/ObscureEngine/src/Logger.cpp)
+
+add_library(obscureengine SHARED ${OBSCURE_SOURCE_FILES})
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} OpenGL GLEW::GLEW glfw)
+target_link_libraries(${PROJECT_NAME} OpenGL GLEW::GLEW glfw obscureengine)

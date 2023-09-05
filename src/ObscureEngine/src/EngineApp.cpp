@@ -1,5 +1,5 @@
-#include "EngineApp.h"
-#include "FPSCounter.h"
+#include "../include/ObscureEngine/EngineApp.h"
+#include "../include/ObscureEngine/FPSCounter.h"
 
 Engine::EngineApp::EngineApp(std::string window_name, int width, int height, int x, int y)
 {

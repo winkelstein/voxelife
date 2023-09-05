@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "../include/ObscureEngine/Camera.h"
 
 void Engine::Camera::updateView()
 {

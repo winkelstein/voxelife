@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include "../include/ObscureEngine/Mesh.h"
 
 std::vector<float> Engine::Mesh::import_model(std::filesystem::path path)
 {
