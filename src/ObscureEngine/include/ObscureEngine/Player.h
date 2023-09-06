@@ -1,5 +1,8 @@
 #pragma once
 #include "Camera.h"
+#include "WS/Window.h"
+#include "WS/Mouse.hpp"
+#include "WS/Keyboard.hpp"
 
 #define TICK_COEFF 120
 
@@ -22,8 +25,8 @@ namespace Engine
         Player();
 
     public:
-        // TODO: implement void onMouseInput();
-        // TODO: implement void onKeyboardInput();
+        void onMouseInput(const WS::Window &win);
+        void onKeyboardInput(const WS::Window &win);
 
         void process(double ticks);
 
