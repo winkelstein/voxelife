@@ -35,12 +35,7 @@ void Engine::WS::Window::swapBuffers()
     glfwSwapBuffers(this->window);
 }
 
-void Engine::WS::Window::pollEvent()
+void Engine::WS::Window::pollEvent(Event &ev)
 {
     glfwPollEvents();
-}
-
-bool Engine::WS::Window::isOpen()
-{
-    return !glfwWindowShouldClose(this->window);
 }

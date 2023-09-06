@@ -19,6 +19,8 @@ Engine::EngineApp::EngineApp(std::string window_name, int width, int height, int
 
 Engine::EngineApp::~EngineApp()
 {
+    this->logger << Logger::message("Obscure Engine", "Closing session");
+    this->logger.flush();
 }
 
 void Engine::EngineApp::window_init(std::string name, int width, int height)
@@ -51,8 +53,9 @@ void Engine::EngineApp::_debugfunc(unsigned int source, unsigned int type, unsig
     *logger << Logger::message("OpenGL", message, sev);
 }
 
-void Engine::EngineApp::run()
+/*void Engine::EngineApp::run()
 {
+
     FPSCounter counter;
     while (this->window->isOpen())
     {
@@ -67,4 +70,4 @@ void Engine::EngineApp::run()
         this->logger.flush();
         counter.stop();
     }
-}
+}*/

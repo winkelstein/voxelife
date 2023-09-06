@@ -19,7 +19,7 @@ namespace Engine
         EngineApp(std::string window_name, int width, int height, int x, int y);
         ~EngineApp();
 
-        virtual void run();
+        virtual void run() = 0;
 
     protected:
         static void _debugfunc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char *message, const void *classptr);

@@ -10,6 +10,8 @@
 #include <ObscureEngine/EngineApp.h>
 #include <ObscureEngine/Importer/ShaderImporter.h>
 #include <ObscureEngine/Logger.h>
+#include <ObscureEngine/WS/Keyboard.hpp>
+#include <ObscureEngine/WS/Mouse.hpp>
 
 #ifdef _RELEASE
 #define SHADER_PATH std::string("shaders/")
@@ -62,11 +64,12 @@ Application::~Application()
 
 void Application::run()
 {
+    Engine::WS::Event ev;
     FPSCounter counter;
     while (this->window->isOpen())
     {
         counter.start();
-        this->window->pollEvent();
+        this->window->pollEvent(ev);
 
         draw();
 
@@ -74,6 +77,15 @@ void Application::run()
         glClearColor(135.0 / 255.0f, 206.0 / 255.0f, 235.0 / 255.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         this->logger.flush();
+
+        if (Engine::WS::Keyboard::isButtonPressed(*this->window, Engine::WS::Keyboard::VirtualKey::ESC))
+            this->window->close();
+
+        int xpos = this->window->size().width / 2;
+        int ypos = this->window->size().height / 2;
+
+        Engine::WS::Mouse::position(*this->window, Engine::WS::Position(xpos, ypos));
+
         counter.stop();
     }
 }
