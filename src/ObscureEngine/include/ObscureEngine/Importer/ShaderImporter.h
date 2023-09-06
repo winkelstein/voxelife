@@ -6,8 +6,10 @@ namespace Engine
 {
     namespace Importer
     {
-        class ShaderImporter : public Importer
+        class ShaderImporter : public Importer<gltk::Shader>
         {
+            using ShaderImporterType = std::pair<std::string, std::shared_ptr<gltk::Shader>>;
+
         public:
             enum class ShaderType
             {
@@ -20,16 +22,14 @@ namespace Engine
             };
 
         private:
-            GLuint shaders[6];
-
-        private:
             static std::string getSourceFromFile(std::filesystem::path path);
             static GLuint compileShader(std::string src, ShaderType type);
 
+            static GLuint linkShaderProgram(std::vector<GLuint> shaders);
+            static GLuint add(ShaderType type, std::filesystem::path path);
+
         public:
-            ShaderImporter();
-            void add(ShaderType type, std::filesystem::path path);
-            std::shared_ptr<gltk::Shader> import();
+            ShaderImporterType import(std::filesystem::path path_to_config) override;
         };
     }
 }

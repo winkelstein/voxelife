@@ -51,11 +51,9 @@ void Application::assets_init()
 {
     using namespace Engine::Importer;
     ShaderImporter shader_importer;
-    shader_importer.add(ShaderImporter::ShaderType::vertex, SHADER_PATH + "/default/vertex.glsl");
-    shader_importer.add(ShaderImporter::ShaderType::fragment, SHADER_PATH + "/default/fragment.glsl");
-
-    auto shader = shader_importer.import();
-    this->logger << Logger::message("Assets", "Default shader has been imported successfully");
+    auto shader_data = shader_importer.import(SHADER_PATH + "/default/");
+    std::string shader_name = shader_data.first;
+    this->logger << Logger::message("Assets", shader_name + " shader has been imported successfully");
 }
 
 Application::~Application()

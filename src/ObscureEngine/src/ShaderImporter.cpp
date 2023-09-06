@@ -1,12 +1,5 @@
 #include "../include/ObscureEngine/Importer/ShaderImporter.h"
-
-Engine::Importer::ShaderImporter::ShaderImporter()
-{
-    for (uint8_t i = 0; i < 6; i++)
-    {
-        this->shaders[i] = 0;
-    }
-}
+#include <nlohmann/json.hpp>
 
 std::string Engine::Importer::ShaderImporter::getSourceFromFile(std::filesystem::path path)
 {
@@ -41,23 +34,16 @@ GLuint Engine::Importer::ShaderImporter::compileShader(std::string src, ShaderTy
         return shader;
 }
 
-void Engine::Importer::ShaderImporter::add(ShaderType type, std::filesystem::path path)
+GLuint Engine::Importer::ShaderImporter::add(ShaderType type, std::filesystem::path path)
 {
-    uint8_t i = 0;
-    while (this->shaders[i] != 0)
-        i++;
-
-    if (i > 6)
-        throw std::runtime_error("too much shaders");
-    else
-        this->shaders[i] = ShaderImporter::compileShader(ShaderImporter::getSourceFromFile(path), type);
+    return ShaderImporter::compileShader(ShaderImporter::getSourceFromFile(path), type);
 }
-std::shared_ptr<Engine::gltk::Shader> Engine::Importer::ShaderImporter::import()
-{
 
+GLuint Engine::Importer::ShaderImporter::linkShaderProgram(std::vector<GLuint> shaders)
+{
     GLuint handler = glCreateProgram();
-    for (uint8_t i = 0; i < this->shaders[i] != 0; i++)
-        glAttachShader(handler, this->shaders[i]);
+    for (uint8_t i = 0; i < shaders.size(); i++)
+        glAttachShader(handler, shaders[i]);
 
     glLinkProgram(handler);
 
@@ -71,10 +57,74 @@ std::shared_ptr<Engine::gltk::Shader> Engine::Importer::ShaderImporter::import()
         throw std::runtime_error(infoLog.c_str());
     }
 
-    for (uint8_t i = 0; i < this->shaders[i] > 0; i++)
+    return handler;
+}
+
+Engine::Importer::ShaderImporter::ShaderImporterType Engine::Importer::ShaderImporter::import(std::filesystem::path path_to_config)
+{
+    using json = nlohmann::json;
+    std::ifstream f(path_to_config / "config.json");
+
+    if (!f.is_open())
+        throw std::runtime_error("config.json file is not found");
+
+    json data = json::parse(f);
+
+    std::string name = data["name"].get<std::string>();
+
+    /*
+    geometry
+    tess_control
+    tess_evaluation
+    compute
+    */
+
+    std::vector<std::pair<ShaderType, std::filesystem::path>> shaders_data;
+    if (data.contains("vertex"))
     {
-        glDeleteShader(this->shaders[i]);
-        this->shaders[i] = 0;
+        std::filesystem::path vertex = data["vertex"].get<std::string>();
+        shaders_data.push_back(std::make_pair(ShaderType::vertex, path_to_config / vertex));
     }
-    return std::shared_ptr<gltk::Shader>(new gltk::Shader(handler));
+
+    if (data.contains("fragment"))
+    {
+        std::filesystem::path fragment = data["fragment"].get<std::string>();
+        shaders_data.push_back(std::make_pair(ShaderType::fragment, path_to_config / fragment));
+    }
+
+    if (data.contains("geometry"))
+    {
+        std::filesystem::path geometry = data["geometry"].get<std::string>();
+        shaders_data.push_back(std::make_pair(ShaderType::geometry, path_to_config / geometry));
+    }
+
+    if (data.contains("tess_control"))
+    {
+        std::filesystem::path tess_control = data["tess_control"].get<std::string>();
+        shaders_data.push_back(std::make_pair(ShaderType::tess_control, path_to_config / tess_control));
+    }
+
+    if (data.contains("tess_evaluation"))
+    {
+        std::filesystem::path tess_evaluation = data["tess_evaluation"].get<std::string>();
+        shaders_data.push_back(std::make_pair(ShaderType::tess_evaluation, path_to_config / tess_evaluation));
+    }
+
+    if (data.contains("compute"))
+    {
+        std::filesystem::path compute = data["compute"].get<std::string>();
+        shaders_data.push_back(std::make_pair(ShaderType::compute, path_to_config / compute));
+    }
+
+    if (shaders_data.size() < 1)
+        throw std::runtime_error("no shaders is provided");
+
+    std::vector<GLuint> shaders;
+
+    for (auto &shader_data : shaders_data)
+        shaders.push_back(ShaderImporter::add(shader_data.first, shader_data.second));
+
+    std::shared_ptr<gltk::Shader> program = std::shared_ptr<gltk::Shader>(new gltk::Shader(ShaderImporter::linkShaderProgram(shaders)));
+
+    return std::make_pair(name, program);
 }

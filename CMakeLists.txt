@@ -12,6 +12,7 @@ find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
 
 include_directories(src/ObscureEngine/include)
+include_directories(src/third-party/json/single_include)
 
 file(GLOB
         SOURCE_FILES "src/*.cpp")

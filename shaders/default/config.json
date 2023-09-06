@@ -1,0 +1,5 @@
+{
+  "name": "default",
+  "vertex": "vertex.glsl",
+  "fragment": "fragment.glsl"
+}
