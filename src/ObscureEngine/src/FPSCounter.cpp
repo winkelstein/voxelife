@@ -11,5 +11,5 @@ void Engine::FPSCounter::stop()
 {
     auto end = std::chrono::high_resolution_clock::now();
 
-    this->m_ticks = (end - this->time).count() / 1000000.0;
+    this->m_ticks = std::chrono::duration_cast<std::chrono::nanoseconds>(end - this->time).count();
 }

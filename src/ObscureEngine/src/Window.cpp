@@ -23,6 +23,9 @@ Engine::WS::Window::Window(std::string window_name, int width, int height)
     {
         throw std::runtime_error("Failed to initialize GLEW");
     }
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 }
 
 Engine::WS::Window::~Window()

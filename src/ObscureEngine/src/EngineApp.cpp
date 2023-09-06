@@ -15,6 +15,8 @@ Engine::EngineApp::EngineApp(std::string window_name, int width, int height, int
 
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(EngineApp::_debugfunc, &this->logger);
+
+    this->player = std::unique_ptr<Player>(new Player());
 }
 
 Engine::EngineApp::~EngineApp()

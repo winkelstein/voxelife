@@ -1,15 +1,12 @@
 #include "../include/ObscureEngine/Player.h"
-
-Engine::Player::Player() : speed(1.3), sensitive(0.1), velocity(glm::vec3(0.0))
-{
-}
+#include "../include/ObscureEngine/Physics/Core.h"
 
 void Engine::Player::move(glm::vec3 velocity)
 {
     glm::vec3 position = this->m_camera.position();
     glm::vec3 front = this->m_camera.front();
 
-    front.y = 0.0;
+    // front.y = 0.0;
 
     position += glm::normalize(front) * velocity.x;
     position += glm::normalize(glm::cross(front, glm::vec3(0.0, 1.0, 0.0))) * velocity.z;
@@ -48,7 +45,7 @@ void Engine::Player::onKeyboardInput(const Engine::WS::Window &win)
 
 void Engine::Player::process(double ticks)
 {
-    float speed = this->speed * ticks / TICK_COEFF;
+    float speed = this->speed * ticks / Physics::constants::TICK_COEFF;
 
     this->move(speed * this->velocity);
 }

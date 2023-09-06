@@ -52,9 +52,7 @@ Engine::WS::Position Engine::WS::Mouse::position(const Window &win)
 
 void Engine::WS::Mouse::position(const Window &win, const Position pos)
 {
-    Size win_size = win.size();
-    if (pos.x > 0 && pos.y > 0 && pos.x < win_size.width && pos.y < win_size.width)
-        glfwSetCursorPos(win.__get_native_handler(), pos.x, pos.x);
+    glfwSetCursorPos(win.__get_native_handler(), pos.x, pos.y);
 }
 
 void Engine::WS::Mouse::visibility(const Window &win, bool state)

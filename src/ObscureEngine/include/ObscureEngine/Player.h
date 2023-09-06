@@ -4,8 +4,6 @@
 #include "WS/Mouse.hpp"
 #include "WS/Keyboard.hpp"
 
-#define TICK_COEFF 120
-
 namespace Engine
 {
     class Player
@@ -22,13 +20,13 @@ namespace Engine
         void move(glm::vec3 velocity);
 
     public:
-        Player();
+        Player() : speed(5.0), sensitive(0.1), velocity(glm::vec3(0.0)) {}
 
     public:
-        void onMouseInput(const WS::Window &win);
-        void onKeyboardInput(const WS::Window &win);
+        virtual void onMouseInput(const WS::Window &win);
+        virtual void onKeyboardInput(const WS::Window &win);
 
-        void process(double ticks);
+        virtual void process(double ticks);
 
     public:
         inline const Engine::Camera &camera() const { return this->m_camera; }
