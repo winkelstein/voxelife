@@ -1,7 +1,8 @@
 #include "../include/ObscureEngine/Voxel.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "../include/ObscureEngine/Physics/Core.h"
 
-Engine::Voxel::Voxel(glm::vec4 color) : color(color)
+Engine::Voxel::Voxel(glm::vec4 color) : color(color), m_position(glm::vec3(0.0)), m_size(glm::vec3(1.0)), m_rotate(glm::vec3(0.0)), m_rotate_around_point(glm::vec3(0.0))
 {
     this->model = glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f));
     if (this->VAO != 0)
@@ -96,8 +97,46 @@ void Engine::Voxel::size(glm::vec3 size)
     this->update_matrix();
 }
 
+void Engine::Voxel::rotate(glm::vec3 point, glm::vec3 angles)
+{
+    this->m_rotate = angles;
+    this->m_rotate_around_point = point;
+
+    this->update_matrix();
+}
+
+/*void Engine::Voxel::update_matrix()
+{
+    using Engine::Physics::constants::pi;
+
+    glm::mat4 _model = glm::mat4(1.0f);
+    _model = glm::translate(_model, this->m_position);
+
+    _model = glm::rotate(_model, glm::radians(this->m_rotate.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    _model = glm::rotate(_model, glm::radians(this->m_rotate.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    _model = glm::rotate(_model, glm::radians(this->m_rotate.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+    _model = glm::scale(_model, this->m_size);
+
+    this->model = _model;
+}*/
+
 void Engine::Voxel::update_matrix()
 {
-    glm::mat4 _model = glm::translate(glm::mat4(1.0), this->m_position);
-    this->model = glm::scale(_model, this->m_size);
+    using Engine::Physics::constants::pi;
+
+    glm::mat4 _model = glm::mat4(1.0f);
+
+    glm::vec3 offset = this->m_rotate_around_point;
+
+    _model = glm::translate(_model, this->m_position);
+    _model = glm::translate(_model, offset);
+    _model = glm::rotate(_model, glm::radians(this->m_rotate.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    _model = glm::rotate(_model, glm::radians(this->m_rotate.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    _model = glm::rotate(_model, glm::radians(this->m_rotate.z), glm::vec3(0.0f, 0.0f, 1.0f));
+    _model = glm::translate(_model, -offset);
+
+    _model = glm::scale(_model, this->m_size);
+
+    this->model = _model;
 }

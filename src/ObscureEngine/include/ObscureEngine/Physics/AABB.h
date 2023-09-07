@@ -38,7 +38,7 @@ namespace Engine
                 glm::vec3 b_max = obj2.position() + (obj2.size() / 2.0f);
 
                 // Переменные для хранения векторов смещения по каждой оси
-                glm::vec3 displacement;
+                glm::vec3 displacement = glm::vec3(0.0f, 0.0f, 0.0f);
 
                 // Проверка пересечения по каждой оси
                 if (a_max.x >= b_min.x && a_min.x <= b_max.x)
