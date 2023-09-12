@@ -1,6 +1,6 @@
 [submodule "src/third-party/json"]
-	path = src/third-party/json
+	path = src/ObscureEngine/third-party/json
 	url = https://github.com/nlohmann/json
 [submodule "src/third-party/bullet3"]
-	path = src/third-party/bullet3
+	path = src/ObscureEngine/third-party/bullet3
 	url = https://github.com/bulletphysics/bullet3.git
