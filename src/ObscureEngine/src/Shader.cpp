@@ -52,18 +52,18 @@ Engine::gltk::Shader::~Shader()
 
 void Engine::gltk::Shader::bind()
 {
-    /*if (!this->_checkIsBinded())
-    {*/
-    this->_bind();
-    glUseProgram(this->handler);
-    //}
+    if (!this->_checkIsBinded())
+    {
+        this->_bind();
+        glUseProgram(this->handler);
+    }
 }
 
 void Engine::gltk::Shader::unbind()
 {
-    /*if (this->_checkIsBinded())
-    {*/
-    this->_unbind();
-    glUseProgram(0);
-    //}
+    if (this->_checkIsBinded())
+    {
+        this->_unbind();
+        glUseProgram(0);
+    }
 }

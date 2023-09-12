@@ -53,19 +53,19 @@ inline void Engine::gltk::UniformBuffer<_Ty>::bindBase(const unsigned int base) 
 template <typename _Ty>
 inline void Engine::gltk::UniformBuffer<_Ty>::bind()
 {
-    /*if (!this->_checkIsBinded())
-    {*/
-    this->_bind();
-    glBindBuffer(GL_UNIFORM_BUFFER, this->handler);
-    //}
+    if (!this->_checkIsBinded())
+    {
+        this->_bind();
+        glBindBuffer(GL_UNIFORM_BUFFER, this->handler);
+    }
 }
 
 template <typename _Ty>
 inline void Engine::gltk::UniformBuffer<_Ty>::unbind()
 {
-    /*if (this->_checkIsBinded())
-    {*/
-    this->_unbind();
-    glBindBuffer(GL_UNIFORM_BUFFER, 0);
-    //}
+    if (this->_checkIsBinded())
+    {
+        this->_unbind();
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    }
 }
