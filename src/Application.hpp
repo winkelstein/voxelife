@@ -17,11 +17,7 @@
 #include <ObscureEngine/Voxel.h>
 #include <ObscureEngine/Physics/Core.h>
 
-#ifdef _RELEASE
-#define SHADER_PATH std::string("shaders/")
-#else
-#define SHADER_PATH std::string("../shaders/")
-#endif // _DEBUG
+const std::string SHADER_PATH = "shaders/";
 
 using Engine::Assets;
 using Engine::FPSCounter;
