@@ -46,5 +46,5 @@ void Engine::Logger::out(const message &msg)
     std::cout << "[" << std::setw(2) << std::setfill('0') << now.tm_hour << ":" << std::setw(2) << std::setfill('0') << now.tm_min << ":" << std::setw(2) << std::setfill('0') << now.tm_sec << " " << msg.header << "]: ";
     std::cout << END;
     std::cout << msg.body << std::endl;
-    outputfile << "[" << now.tm_hour << ":" << now.tm_min << ":" << now.tm_sec << "] " << msg.header << ": " << msg.body << std::endl;
+    outputfile << "[" << std::setw(2) << std::setfill('0') << now.tm_hour << ":" << std::setw(2) << std::setfill('0') << now.tm_min << ":" << std::setw(2) << std::setfill('0') << now.tm_sec << " " << msg.header << "]: " << msg.body << std::endl;
 }
