@@ -20,7 +20,7 @@ namespace Engine
         void move(glm::vec3 velocity);
 
     public:
-        Player() : speed(5.0), sensitive(0.1), velocity(glm::vec3(0.0)) {}
+        Player() : speed(5.0), velocity(glm::vec3(0.0)), sensitive(0.1) {}
 
     public:
         virtual void onMouseInput(const WS::Window &win);

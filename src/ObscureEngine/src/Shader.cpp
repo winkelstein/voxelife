@@ -10,7 +10,7 @@ void Engine::gltk::Shader::getUniforms()
 
     GLenum properties[] = {GL_NAME_LENGTH, GL_TYPE, GL_LOCATION, GL_BLOCK_INDEX};
 
-    for (size_t i = 0; i < numUniforms; i++)
+    for (int i = 0; i < numUniforms; i++)
     {
         GLint results[4];
         glGetProgramResourceiv(this->handler, GL_UNIFORM, i, 4, properties, 4, nullptr, results);

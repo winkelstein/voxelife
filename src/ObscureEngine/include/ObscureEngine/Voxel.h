@@ -16,8 +16,8 @@ namespace Engine
         glm::mat4 model;
         glm::vec4 m_color;
 
-        glm::vec3 m_size;
         glm::vec3 m_position;
+        glm::vec3 m_size;
         glm::vec3 m_rotate;
         glm::vec3 m_rotate_around_point;
 

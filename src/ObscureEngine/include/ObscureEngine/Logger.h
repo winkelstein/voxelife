@@ -1,5 +1,7 @@
 #pragma once
+#ifdef _WIN32
 #pragma warning(disable : 4996)
+#endif
 
 #include <string>
 #include <queue>
