@@ -28,8 +28,6 @@ using Engine::FPSCounter;
 using Engine::Logger;
 using Engine::gltk::Shader;
 
-#include <ObscureEngine/Physics/AABB.h>
-
 class Application : public Engine::EngineApp
 {
 private:
@@ -84,13 +82,15 @@ void Application::run()
     Engine::Voxel grass(glm::vec4(0.24, 0.46, 0.23, 1.0));
     Engine::Voxel tree(glm::vec4(101.0 / 255.0, 67 / 255.0, 33 / 255.0, 1.0));
     Engine::Voxel leaves(glm::vec4(0.0, 1.0, 0.0, 1.0));
-    grass.position(glm::vec3(-5.0f, -3.0f, -2.5f));
-    tree.position(glm::vec3(-5.0f, -1.45, -2.5));
-    leaves.position(glm::vec3(-5.0f, -0.5, -2.5));
+    grass.position(glm::vec3(0.0f, -3.0f, 0));
+    tree.position(glm::vec3(0.0f, -1.45, 0));
+    leaves.position(glm::vec3(0.0f, -0.5, 0));
 
     grass.size(glm::vec3(15.0f, 0.1f, 15.0f));
     tree.size(glm::vec3(0.5, 3.0, 0.5));
     leaves.size(glm::vec3(2.0, 0.25, 0.1));
+
+    // grass.rotate(glm::vec3(1.0, 0.0, 0.0), glm::vec3(30.0, 0.0, 0.0));
 
     while (this->window->isOpen())
     {

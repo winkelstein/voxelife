@@ -47,8 +47,8 @@ namespace Engine
 
         public:
             // UNSAFE! For better optimization bind function does not check link status
-            void bind() const override;
-            void unbind() const override;
+            void bind() override;
+            void unbind() override;
 
         public:
             template <typename _Ty>

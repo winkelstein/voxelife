@@ -18,8 +18,8 @@ namespace Engine
             void bindBase(const unsigned int base) const;
 
         public:
-            void bind() const override;
-            void unbind() const override;
+            void bind() override;
+            void unbind() override;
         };
     }
 }
@@ -51,13 +51,21 @@ inline void Engine::gltk::UniformBuffer<_Ty>::bindBase(const unsigned int base) 
 }
 
 template <typename _Ty>
-inline void Engine::gltk::UniformBuffer<_Ty>::bind() const
+inline void Engine::gltk::UniformBuffer<_Ty>::bind()
 {
+    /*if (!this->_checkIsBinded())
+    {*/
+    this->_bind();
     glBindBuffer(GL_UNIFORM_BUFFER, this->handler);
+    //}
 }
 
 template <typename _Ty>
-inline void Engine::gltk::UniformBuffer<_Ty>::unbind() const
+inline void Engine::gltk::UniformBuffer<_Ty>::unbind()
 {
+    /*if (this->_checkIsBinded())
+    {*/
+    this->_unbind();
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    //}
 }

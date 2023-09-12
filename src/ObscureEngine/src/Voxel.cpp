@@ -2,61 +2,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "../include/ObscureEngine/Physics/Core.h"
 
-Engine::Voxel::Voxel(glm::vec4 color) : color(color), m_position(glm::vec3(0.0)), m_size(glm::vec3(1.0)), m_rotate(glm::vec3(0.0)), m_rotate_around_point(glm::vec3(0.0))
+Engine::Voxel::Voxel(glm::vec4 color) : m_color(color), m_position(glm::vec3(0.0)), m_size(glm::vec3(1.0)), m_rotate(glm::vec3(0.0)), m_rotate_around_point(glm::vec3(0.0))
 {
     this->model = glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f));
     if (this->VAO != 0)
         return;
 
-    GLfloat vertices[] = {
-        // Передняя грань
-        -0.5f, -0.5f, 0.5f, // 0
-        0.5f, -0.5f, 0.5f,  // 1
-        0.5f, 0.5f, 0.5f,   // 2
-        -0.5f, -0.5f, 0.5f, // 3
-        0.5f, 0.5f, 0.5f,   // 4
-        -0.5f, 0.5f, 0.5f,  // 5
-
-        // Задняя грань
-        -0.5f, -0.5f, -0.5f, // 6
-        0.5f, -0.5f, -0.5f,  // 7
-        0.5f, 0.5f, -0.5f,   // 8
-        -0.5f, -0.5f, -0.5f, // 9
-        0.5f, 0.5f, -0.5f,   // 10
-        -0.5f, 0.5f, -0.5f,  // 11
-
-        // Левая грань
-        -0.5f, -0.5f, -0.5f, // 12
-        -0.5f, 0.5f, -0.5f,  // 13
-        -0.5f, -0.5f, 0.5f,  // 14
-        -0.5f, 0.5f, -0.5f,  // 15
-        -0.5f, 0.5f, 0.5f,   // 16
-        -0.5f, -0.5f, 0.5f,  // 17
-
-        // Правая грань
-        0.5f, -0.5f, -0.5f, // 18
-        0.5f, 0.5f, -0.5f,  // 19
-        0.5f, -0.5f, 0.5f,  // 20
-        0.5f, 0.5f, -0.5f,  // 21
-        0.5f, 0.5f, 0.5f,   // 22
-        0.5f, -0.5f, 0.5f,  // 23
-
-        // Верхняя грань
-        -0.5f, 0.5f, -0.5f, // 24
-        0.5f, 0.5f, -0.5f,  // 25
-        0.5f, 0.5f, 0.5f,   // 26
-        -0.5f, 0.5f, -0.5f, // 27
-        0.5f, 0.5f, 0.5f,   // 28
-        -0.5f, 0.5f, 0.5f,  // 29
-
-        // Нижняя грань
-        -0.5f, -0.5f, -0.5f, // 30
-        0.5f, -0.5f, -0.5f,  // 31
-        0.5f, -0.5f, 0.5f,   // 32
-        -0.5f, -0.5f, -0.5f, // 33
-        0.5f, -0.5f, 0.5f,   // 34
-        -0.5f, -0.5f, 0.5f   // 35
-    };
+    std::vector<float> vertices = Voxel::__get_model_vertices();
 
     glGenVertexArrays(1, &this->VAO);
     unsigned int VBO;
@@ -65,7 +17,7 @@ Engine::Voxel::Voxel(glm::vec4 color) : color(color), m_position(glm::vec3(0.0))
     glBindVertexArray(this->VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
     glEnableVertexArrayAttrib(this->VAO, 0);
 
@@ -81,7 +33,7 @@ void Engine::Voxel::draw(gltk::Shader &shader) const
 {
     shader.bind();
     shader.uniform<glm::mat4>("model", this->model);
-    shader.uniform<glm::vec4>("color", this->color);
+    shader.uniform<glm::vec4>("color", this->m_color);
     Renderer::render(this->VAO);
 }
 
@@ -105,21 +57,10 @@ void Engine::Voxel::rotate(glm::vec3 point, glm::vec3 angles)
     this->update_matrix();
 }
 
-/*void Engine::Voxel::update_matrix()
+void Engine::Voxel::color(glm::vec4 col)
 {
-    using Engine::Physics::constants::pi;
-
-    glm::mat4 _model = glm::mat4(1.0f);
-    _model = glm::translate(_model, this->m_position);
-
-    _model = glm::rotate(_model, glm::radians(this->m_rotate.x), glm::vec3(1.0f, 0.0f, 0.0f));
-    _model = glm::rotate(_model, glm::radians(this->m_rotate.y), glm::vec3(0.0f, 1.0f, 0.0f));
-    _model = glm::rotate(_model, glm::radians(this->m_rotate.z), glm::vec3(0.0f, 0.0f, 1.0f));
-
-    _model = glm::scale(_model, this->m_size);
-
-    this->model = _model;
-}*/
+    this->m_color = col;
+}
 
 void Engine::Voxel::update_matrix()
 {

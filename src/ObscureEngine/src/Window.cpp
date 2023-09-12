@@ -25,7 +25,10 @@ Engine::WS::Window::Window(std::string window_name, int width, int height)
     }
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+
     glDepthFunc(GL_LESS);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 Engine::WS::Window::~Window()

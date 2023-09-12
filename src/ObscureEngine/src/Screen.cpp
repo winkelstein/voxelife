@@ -5,7 +5,7 @@ Engine::Screen::Screen(const WS::Size size)
 {
     glViewport(0, 0, size.width, size.height);
     std::memset(&this->mvp, 0, sizeof(MVP));
-    this->mvp.projection = glm::perspectiveFov(glm::radians(60.0f), (float)size.width, (float)size.height, 0.01f, 100.0f);
+    this->mvp.projection = glm::perspectiveFov(glm::radians(60.0f), (float)size.width, (float)size.height, 0.01f, 10000.0f);
 
     this->ubo.bind();
     this->ubo.bindBase(0);

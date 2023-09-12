@@ -50,12 +50,20 @@ Engine::gltk::Shader::~Shader()
     glDeleteProgram(this->handler);
 }
 
-void Engine::gltk::Shader::bind() const
+void Engine::gltk::Shader::bind()
 {
+    /*if (!this->_checkIsBinded())
+    {*/
+    this->_bind();
     glUseProgram(this->handler);
+    //}
 }
 
-void Engine::gltk::Shader::unbind() const
+void Engine::gltk::Shader::unbind()
 {
+    /*if (this->_checkIsBinded())
+    {*/
+    this->_unbind();
     glUseProgram(0);
+    //}
 }

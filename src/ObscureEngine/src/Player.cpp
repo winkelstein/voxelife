@@ -10,7 +10,8 @@ void Engine::Player::move(glm::vec3 velocity)
 
     position += glm::normalize(front) * velocity.x;
     position += glm::normalize(glm::cross(front, glm::vec3(0.0, 1.0, 0.0))) * velocity.z;
-    position += glm::normalize(glm::cross(front, glm::cross(front, glm::vec3(0.0, 1.0, 0.0)))) * (-velocity.y);
+    // position += glm::normalize(glm::cross(front, glm::cross(front, glm::vec3(0.0, 1.0, 0.0)))) * (-velocity.y);
+    position += glm::vec3(0.0, 1.0, 0.0) * velocity.y;
 
     this->m_camera.position(position);
 }
@@ -41,6 +42,10 @@ void Engine::Player::onKeyboardInput(const Engine::WS::Window &win)
 
     this->velocity.x = ((1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::W) + (-1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::S))));
     this->velocity.z = ((1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::D) + (-1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::A))));
+    this->velocity.y = ((1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::Space)) + (-1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::LeftCtrl)));
+
+    if (Keyboard::isButtonPressed(win, Keyboard::VirtualKey::LeftShift))
+        this->velocity *= 2;
 }
 
 void Engine::Player::process(double ticks)
