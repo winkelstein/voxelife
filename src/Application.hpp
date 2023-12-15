@@ -41,7 +41,7 @@ private:
     void assets_init();
 };
 
-Application::Application() : Engine::EngineApp("Biolife", 800, 600, 0, 0)
+Application::Application() : Engine::EngineApp("Voxelife", 800, 600, 0, 0)
 {
     try
     {
