@@ -10,9 +10,6 @@
 [submodule "src/ObscureEngine/third-party/json"]
 	path = src/ObscureEngine/third-party/json
 	url = https://github.com/nlohmann/json
-[submodule "src/ObscureEngine/third-party/glew"]
-	path = src/ObscureEngine/third-party/glew
-	url = https://github.com/nigels-com/glew
 [submodule "src/ObscureEngine/third-party/glfw"]
 	path = src/ObscureEngine/third-party/glfw
 	url = https://github.com/glfw/glfw

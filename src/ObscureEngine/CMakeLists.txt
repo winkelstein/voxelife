@@ -7,13 +7,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -Wno-unused-variable -Wno-unused-parameter")
 
 find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third-party/glew)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third-party/bullet3)
+#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third-party/bullet3)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third-party/glfw)
 
 set(OBSCUREENGINE_LIBRARIES
@@ -26,6 +26,8 @@ set(OBSCUREENGINE_LIBRARIES
 set(OBSCUREENGINE_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 include_directories(${BULLET_INCLUDE_DIRS})
+include_directories(${GLEW_INCLUDE_DIRS})
+link_libraries(${GLEW_LIBRARIES})
 
 file(GLOB
         SOURCE_FILES "src/*.cpp")
