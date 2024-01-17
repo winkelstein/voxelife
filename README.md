@@ -16,6 +16,7 @@ git clone --recurse-submodules https://github.com/winkelstein/voxelife.git voxel
 mkdir build
 cd build
 cmake ..
+make
 cd ..
 ./build/voxelife
 ```
