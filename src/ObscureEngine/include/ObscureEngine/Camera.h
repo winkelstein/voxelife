@@ -12,7 +12,7 @@ namespace ObscureEngine
         glm::mat4 m_view;
 
     protected:
-        void updateView();
+        void update_view();
 
     public:
         Camera(glm::vec3 position = glm::vec3(0.0, 0.0, 0.0));

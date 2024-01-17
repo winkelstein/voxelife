@@ -17,8 +17,8 @@ namespace ObscureEngine
             };
 
         public:
-            inline static bool isButtonPressed(const Window &win, const MouseButton button);
-            inline static bool isButtonReleased(const Window &win, const MouseButton button);
+            inline static bool is_button_pressed(const Window &win, const MouseButton button);
+            inline static bool is_button_released(const Window &win, const MouseButton button);
             inline static Position position(const Window &win);
 
             inline static void position(const Window &win, const Position pos);
@@ -28,13 +28,13 @@ namespace ObscureEngine
     }
 }
 
-bool ObscureEngine::WS::Mouse::isButtonPressed(const Window &win, const MouseButton button)
+bool ObscureEngine::WS::Mouse::is_button_pressed(const Window &win, const MouseButton button)
 {
     int state = glfwGetMouseButton(win.__get_native_handler(), (int)button);
     return state == GLFW_PRESS;
 }
 
-bool ObscureEngine::WS::Mouse::isButtonReleased(const Window &win, const MouseButton button)
+bool ObscureEngine::WS::Mouse::is_button_released(const Window &win, const MouseButton button)
 {
     int state = glfwGetMouseButton(win.__get_native_handler(), (int)button);
     return state == GLFW_RELEASE;

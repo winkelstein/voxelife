@@ -24,8 +24,8 @@ namespace ObscureEngine
             ~Window();
 
         public:
-            void swapBuffers();
-            void pollEvent(Event &ev);
+            void swap_buffers();
+            void poll_event(Event &ev);
 
         public:
             inline bool isOpen() { return !glfwWindowShouldClose(this->window); }

@@ -91,11 +91,11 @@ void Application::run()
     while (this->window->isOpen())
     {
         counter.start();
-        this->window->pollEvent(ev);
+        this->window->poll_event(ev);
 
         this->handle_event();
         this->player->process(counter.ticks());
-        this->screen->onUpdateCamera(this->player->camera());
+        this->screen->on_update_camera(this->player->camera());
 
         this->screen->push(&grass, *default_shader);
         this->screen->push(&tree, *default_shader);
@@ -103,10 +103,10 @@ void Application::run()
 
         draw();
 
-        if (ObscureEngine::WS::Keyboard::isButtonPressed(*this->window, ObscureEngine::WS::Keyboard::VirtualKey::ESC))
+        if (ObscureEngine::WS::Keyboard::is_button_pressed(*this->window, ObscureEngine::WS::Keyboard::VirtualKey::ESC))
             this->window->close();
 
-        this->window->swapBuffers();
+        this->window->swap_buffers();
         glClearColor(135.0 / 255.0f, 206.0 / 255.0f, 235.0 / 255.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         this->logger.flush();
@@ -122,7 +122,7 @@ void Application::draw()
 
 void Application::handle_event()
 {
-    this->player->onMouseInput(*this->window);
+    this->player->on_mouse_input(*this->window);
     ObscureEngine::WS::Mouse::position(*this->window, ObscureEngine::WS::Position(this->window->size().width / 2.0, this->window->size().height / 2.0));
-    this->player->onKeyboardInput(*this->window);
+    this->player->on_keyboard_input(*this->window);
 }

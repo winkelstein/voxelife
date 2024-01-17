@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/GLTK/Shader.h"
 #include <cstring>
 
-void ObscureEngine::gltk::Shader::getUniforms()
+void ObscureEngine::gltk::Shader::get_uniforms()
 {
     int numUniforms = 0;
     glGetProgramInterfaceiv(this->handler, GL_UNIFORM, GL_ACTIVE_RESOURCES, &numUniforms);
@@ -30,7 +30,7 @@ void ObscureEngine::gltk::Shader::getUniforms()
     }
 }
 
-ObscureEngine::gltk::Shader::Uniform ObscureEngine::gltk::Shader::findUniform(std::string name)
+ObscureEngine::gltk::Shader::Uniform ObscureEngine::gltk::Shader::find_uniform(std::string name)
 {
     for (size_t i = 0; i < this->uniforms.size(); i++)
         if (name == this->uniforms[i].name)
@@ -42,7 +42,7 @@ ObscureEngine::gltk::Shader::Uniform ObscureEngine::gltk::Shader::findUniform(st
 ObscureEngine::gltk::Shader::Shader(GLuint handler)
 {
     this->handler = handler;
-    this->getUniforms();
+    this->get_uniforms();
 }
 
 ObscureEngine::gltk::Shader::~Shader()
@@ -52,7 +52,7 @@ ObscureEngine::gltk::Shader::~Shader()
 
 void ObscureEngine::gltk::Shader::bind()
 {
-    if (!this->_checkIsBinded())
+    if (!this->_check_is_binded())
     {
         this->_bind();
         glUseProgram(this->handler);
@@ -61,7 +61,7 @@ void ObscureEngine::gltk::Shader::bind()
 
 void ObscureEngine::gltk::Shader::unbind()
 {
-    if (this->_checkIsBinded())
+    if (this->_check_is_binded())
     {
         this->_unbind();
         glUseProgram(0);

@@ -36,12 +36,12 @@ ObscureEngine::WS::Window::~Window()
     glfwTerminate();
 }
 
-void ObscureEngine::WS::Window::swapBuffers()
+void ObscureEngine::WS::Window::swap_buffers()
 {
     glfwSwapBuffers(this->window);
 }
 
-void ObscureEngine::WS::Window::pollEvent(Event &ev)
+void ObscureEngine::WS::Window::poll_event(Event &ev)
 {
     glfwPollEvents();
 }

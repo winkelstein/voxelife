@@ -38,8 +38,8 @@ namespace ObscureEngine
             std::vector<Uniform> uniforms;
 
         private:
-            void getUniforms();
-            Uniform findUniform(std::string name);
+            void get_uniforms();
+            Uniform find_uniform(std::string name);
 
         public:
             Shader(GLuint handler);
@@ -60,7 +60,7 @@ namespace ObscureEngine
 template <>
 inline void ObscureEngine::gltk::Shader::uniform<int>(std::string name, int data)
 {
-    Uniform u = this->findUniform(name);
+    Uniform u = this->find_uniform(name);
     if (u.type == GL_INT)
         glUniform1i(u.location, data);
 }
@@ -68,7 +68,7 @@ inline void ObscureEngine::gltk::Shader::uniform<int>(std::string name, int data
 template <>
 inline void ObscureEngine::gltk::Shader::uniform<float>(std::string name, float data)
 {
-    Uniform u = this->findUniform(name);
+    Uniform u = this->find_uniform(name);
     if (u.type == GL_FLOAT)
         glUniform1f(u.location, data);
 }
@@ -76,7 +76,7 @@ inline void ObscureEngine::gltk::Shader::uniform<float>(std::string name, float 
 template <>
 inline void ObscureEngine::gltk::Shader::uniform<glm::vec3>(std::string name, glm::vec3 data)
 {
-    Uniform u = this->findUniform(name);
+    Uniform u = this->find_uniform(name);
     if (u.type == GL_FLOAT_VEC3)
         glUniform3fv(u.location, 1, &data[0]);
 }
@@ -84,7 +84,7 @@ inline void ObscureEngine::gltk::Shader::uniform<glm::vec3>(std::string name, gl
 template <>
 inline void ObscureEngine::gltk::Shader::uniform<glm::vec4>(std::string name, glm::vec4 data)
 {
-    Uniform u = this->findUniform(name);
+    Uniform u = this->find_uniform(name);
     if (u.type == GL_FLOAT_VEC4)
         glUniform4fv(u.location, 1, &data[0]);
 }
@@ -92,7 +92,7 @@ inline void ObscureEngine::gltk::Shader::uniform<glm::vec4>(std::string name, gl
 template <>
 inline void ObscureEngine::gltk::Shader::uniform<glm::mat4>(std::string name, glm::mat4 data)
 {
-    Uniform u = this->findUniform(name);
+    Uniform u = this->find_uniform(name);
     if (u.type == GL_FLOAT_MAT4)
         glUniformMatrix4fv(u.location, 1, GL_FALSE, &data[0][0]);
 }

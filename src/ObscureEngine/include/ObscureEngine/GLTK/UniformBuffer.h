@@ -15,7 +15,7 @@ namespace ObscureEngine
         public:
             void data(const _Ty *data);
 
-            void bindBase(const unsigned int base) const;
+            void bind_base(const unsigned int base) const;
 
         public:
             void bind() override;
@@ -45,7 +45,7 @@ inline void ObscureEngine::gltk::UniformBuffer<_Ty>::data(const _Ty *data)
 }
 
 template <typename _Ty>
-inline void ObscureEngine::gltk::UniformBuffer<_Ty>::bindBase(const unsigned int base) const
+inline void ObscureEngine::gltk::UniformBuffer<_Ty>::bind_base(const unsigned int base) const
 {
     glBindBufferBase(GL_UNIFORM_BUFFER, base, this->handler);
 }
@@ -53,7 +53,7 @@ inline void ObscureEngine::gltk::UniformBuffer<_Ty>::bindBase(const unsigned int
 template <typename _Ty>
 inline void ObscureEngine::gltk::UniformBuffer<_Ty>::bind()
 {
-    if (!this->_checkIsBinded())
+    if (!this->_check_is_binded())
     {
         this->_bind();
         glBindBuffer(GL_UNIFORM_BUFFER, this->handler);
@@ -63,7 +63,7 @@ inline void ObscureEngine::gltk::UniformBuffer<_Ty>::bind()
 template <typename _Ty>
 inline void ObscureEngine::gltk::UniformBuffer<_Ty>::unbind()
 {
-    if (this->_checkIsBinded())
+    if (this->_check_is_binded())
     {
         this->_unbind();
         glBindBuffer(GL_UNIFORM_BUFFER, 0);

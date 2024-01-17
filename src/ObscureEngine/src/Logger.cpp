@@ -19,7 +19,7 @@ void ObscureEngine::Logger::flush()
 
 void ObscureEngine::Logger::out(const message &msg)
 {
-    std::tm now = this->currentTime();
+    std::tm now = this->current_time();
 
     std::lock_guard<std::recursive_mutex> lock(this->mtx);
     static std::ofstream outputfile("debug.log");

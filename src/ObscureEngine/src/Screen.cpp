@@ -8,7 +8,7 @@ ObscureEngine::Screen::Screen(const WS::Size size)
     this->mvp.projection = glm::perspectiveFov(glm::radians(60.0f), (float)size.width, (float)size.height, 0.01f, 10000.0f);
 
     this->ubo.bind();
-    this->ubo.bindBase(0);
+    this->ubo.bind_base(0);
 
     this->ubo.data(&this->mvp);
 }
@@ -41,7 +41,7 @@ void ObscureEngine::Screen::resize(const WS::Size size)
     }
 }
 
-void ObscureEngine::Screen::onUpdateCamera(const Camera &cam)
+void ObscureEngine::Screen::on_update_camera(const Camera &cam)
 {
     this->mvp.camera_view = cam.view();
 }

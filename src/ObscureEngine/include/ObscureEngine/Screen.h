@@ -35,6 +35,6 @@ namespace ObscureEngine
 
     public:
         void resize(const WS::Size size);
-        void onUpdateCamera(const Camera &cam);
+        void on_update_camera(const Camera &cam);
     };
 }
