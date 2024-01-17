@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/Importer/ShaderImporter.h"
 #include <nlohmann/json.hpp>
 
-std::string Engine::Importer::ShaderImporter::getSourceFromFile(std::filesystem::path path)
+std::string ObscureEngine::Importer::ShaderImporter::get_source_from_file(std::filesystem::path path)
 {
     std::ifstream file(path);
     if (!file.is_open())
@@ -13,7 +13,7 @@ std::string Engine::Importer::ShaderImporter::getSourceFromFile(std::filesystem:
 
     return src;
 }
-GLuint Engine::Importer::ShaderImporter::compileShader(std::string src, ShaderType type)
+GLuint ObscureEngine::Importer::ShaderImporter::compile_shader(std::string src, ShaderType type)
 {
     GLuint shader = glCreateShader((GLenum)type);
     const char *str = src.c_str();
@@ -34,12 +34,12 @@ GLuint Engine::Importer::ShaderImporter::compileShader(std::string src, ShaderTy
         return shader;
 }
 
-GLuint Engine::Importer::ShaderImporter::add(ShaderType type, std::filesystem::path path)
+GLuint ObscureEngine::Importer::ShaderImporter::add(ShaderType type, std::filesystem::path path)
 {
-    return ShaderImporter::compileShader(ShaderImporter::getSourceFromFile(path), type);
+    return ShaderImporter::compile_shader(ShaderImporter::get_source_from_file(path), type);
 }
 
-GLuint Engine::Importer::ShaderImporter::linkShaderProgram(std::vector<GLuint> shaders)
+GLuint ObscureEngine::Importer::ShaderImporter::link_shader_program(std::vector<GLuint> shaders)
 {
     GLuint handler = glCreateProgram();
     for (uint8_t i = 0; i < shaders.size(); i++)
@@ -60,7 +60,7 @@ GLuint Engine::Importer::ShaderImporter::linkShaderProgram(std::vector<GLuint> s
     return handler;
 }
 
-Engine::Importer::ShaderImporter::ShaderImporterType Engine::Importer::ShaderImporter::import(std::filesystem::path path_to_config)
+ObscureEngine::Importer::ShaderImporter::ShaderImporterType ObscureEngine::Importer::ShaderImporter::import(std::filesystem::path path_to_config)
 {
     using json = nlohmann::json;
     std::ifstream f(path_to_config / "config.json");
@@ -124,7 +124,7 @@ Engine::Importer::ShaderImporter::ShaderImporterType Engine::Importer::ShaderImp
     for (auto &shader_data : shaders_data)
         shaders.push_back(ShaderImporter::add(shader_data.first, shader_data.second));
 
-    std::shared_ptr<gltk::Shader> program = std::shared_ptr<gltk::Shader>(new gltk::Shader(ShaderImporter::linkShaderProgram(shaders)));
+    std::shared_ptr<gltk::Shader> program = std::shared_ptr<gltk::Shader>(new gltk::Shader(ShaderImporter::link_shader_program(shaders)));
 
     return std::make_pair(name, program);
 }

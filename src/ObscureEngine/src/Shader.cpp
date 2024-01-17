@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/GLTK/Shader.h"
 #include <cstring>
 
-void Engine::gltk::Shader::getUniforms()
+void ObscureEngine::gltk::Shader::get_uniforms()
 {
     int numUniforms = 0;
     glGetProgramInterfaceiv(this->handler, GL_UNIFORM, GL_ACTIVE_RESOURCES, &numUniforms);
@@ -30,7 +30,7 @@ void Engine::gltk::Shader::getUniforms()
     }
 }
 
-Engine::gltk::Shader::Uniform Engine::gltk::Shader::findUniform(std::string name)
+ObscureEngine::gltk::Shader::Uniform ObscureEngine::gltk::Shader::find_uniform(std::string name)
 {
     for (size_t i = 0; i < this->uniforms.size(); i++)
         if (name == this->uniforms[i].name)
@@ -39,29 +39,29 @@ Engine::gltk::Shader::Uniform Engine::gltk::Shader::findUniform(std::string name
     throw std::runtime_error("specified uniform was not found");
 }
 
-Engine::gltk::Shader::Shader(GLuint handler)
+ObscureEngine::gltk::Shader::Shader(GLuint handler)
 {
     this->handler = handler;
-    this->getUniforms();
+    this->get_uniforms();
 }
 
-Engine::gltk::Shader::~Shader()
+ObscureEngine::gltk::Shader::~Shader()
 {
     glDeleteProgram(this->handler);
 }
 
-void Engine::gltk::Shader::bind()
+void ObscureEngine::gltk::Shader::bind()
 {
-    if (!this->_checkIsBinded())
+    if (!this->_check_is_binded())
     {
         this->_bind();
         glUseProgram(this->handler);
     }
 }
 
-void Engine::gltk::Shader::unbind()
+void ObscureEngine::gltk::Shader::unbind()
 {
-    if (this->_checkIsBinded())
+    if (this->_check_is_binded())
     {
         this->_unbind();
         glUseProgram(0);

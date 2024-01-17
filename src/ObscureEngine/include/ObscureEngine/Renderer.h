@@ -1,7 +1,7 @@
 #pragma once
 #include "GLTK/Shader.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     class Renderer
     {

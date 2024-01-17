@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace Engine
+namespace ObscureEngine
 {
     class Camera
     {
@@ -12,7 +12,7 @@ namespace Engine
         glm::mat4 m_view;
 
     protected:
-        void updateView();
+        void update_view();
 
     public:
         Camera(glm::vec3 position = glm::vec3(0.0, 0.0, 0.0));

@@ -9,7 +9,7 @@
 #include "GLTK/UniformBuffer.h"
 #include "GLTK/Shader.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     struct MVP
     {
@@ -35,6 +35,6 @@ namespace Engine
 
     public:
         void resize(const WS::Size size);
-        void onUpdateCamera(const Camera &cam);
+        void on_update_camera(const Camera &cam);
     };
 }

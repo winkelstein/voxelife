@@ -2,7 +2,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "../include/ObscureEngine/Physics/Core.h"
 
-Engine::Voxel::Voxel(glm::vec4 color) : m_color(color), m_position(glm::vec3(0.0)), m_size(glm::vec3(1.0)), m_rotate(glm::vec3(0.0)), m_rotate_around_point(glm::vec3(0.0))
+GLuint ObscureEngine::Voxel::VAO = 0;
+
+ObscureEngine::Voxel::Voxel(glm::vec4 color) : m_color(color), m_position(glm::vec3(0.0)), m_size(glm::vec3(1.0)), m_rotate(glm::vec3(0.0)), m_rotate_around_point(glm::vec3(0.0))
 {
     this->model = glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f));
     if (this->VAO != 0)
@@ -24,12 +26,12 @@ Engine::Voxel::Voxel(glm::vec4 color) : m_color(color), m_position(glm::vec3(0.0
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
 }
 
-Engine::Voxel::~Voxel()
+ObscureEngine::Voxel::~Voxel()
 {
     glDeleteVertexArrays(1, &this->VAO);
 }
 
-void Engine::Voxel::draw(gltk::Shader &shader) const
+void ObscureEngine::Voxel::draw(gltk::Shader &shader) const
 {
     shader.bind();
     shader.uniform<glm::mat4>("model", this->model);
@@ -37,19 +39,19 @@ void Engine::Voxel::draw(gltk::Shader &shader) const
     Renderer::render(this->VAO);
 }
 
-void Engine::Voxel::position(glm::vec3 position)
+void ObscureEngine::Voxel::position(glm::vec3 position)
 {
     this->m_position = position;
     this->update_matrix();
 }
 
-void Engine::Voxel::size(glm::vec3 size)
+void ObscureEngine::Voxel::size(glm::vec3 size)
 {
     this->m_size = size;
     this->update_matrix();
 }
 
-void Engine::Voxel::rotate(glm::vec3 point, glm::vec3 angles)
+void ObscureEngine::Voxel::rotate(glm::vec3 point, glm::vec3 angles)
 {
     this->m_rotate = angles;
     this->m_rotate_around_point = point;
@@ -57,15 +59,13 @@ void Engine::Voxel::rotate(glm::vec3 point, glm::vec3 angles)
     this->update_matrix();
 }
 
-void Engine::Voxel::color(glm::vec4 col)
+void ObscureEngine::Voxel::color(glm::vec4 col)
 {
     this->m_color = col;
 }
 
-void Engine::Voxel::update_matrix()
+void ObscureEngine::Voxel::update_matrix()
 {
-    using Engine::Physics::constants::pi;
-
     glm::mat4 _model = glm::mat4(1.0f);
 
     glm::vec3 offset = this->m_rotate_around_point;
