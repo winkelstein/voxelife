@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/Importer/ShaderImporter.h"
 #include <nlohmann/json.hpp>
 
-std::string Engine::Importer::ShaderImporter::getSourceFromFile(std::filesystem::path path)
+std::string ObscureEngine::Importer::ShaderImporter::getSourceFromFile(std::filesystem::path path)
 {
     std::ifstream file(path);
     if (!file.is_open())
@@ -13,7 +13,7 @@ std::string Engine::Importer::ShaderImporter::getSourceFromFile(std::filesystem:
 
     return src;
 }
-GLuint Engine::Importer::ShaderImporter::compileShader(std::string src, ShaderType type)
+GLuint ObscureEngine::Importer::ShaderImporter::compileShader(std::string src, ShaderType type)
 {
     GLuint shader = glCreateShader((GLenum)type);
     const char *str = src.c_str();
@@ -34,12 +34,12 @@ GLuint Engine::Importer::ShaderImporter::compileShader(std::string src, ShaderTy
         return shader;
 }
 
-GLuint Engine::Importer::ShaderImporter::add(ShaderType type, std::filesystem::path path)
+GLuint ObscureEngine::Importer::ShaderImporter::add(ShaderType type, std::filesystem::path path)
 {
     return ShaderImporter::compileShader(ShaderImporter::getSourceFromFile(path), type);
 }
 
-GLuint Engine::Importer::ShaderImporter::linkShaderProgram(std::vector<GLuint> shaders)
+GLuint ObscureEngine::Importer::ShaderImporter::linkShaderProgram(std::vector<GLuint> shaders)
 {
     GLuint handler = glCreateProgram();
     for (uint8_t i = 0; i < shaders.size(); i++)
@@ -60,7 +60,7 @@ GLuint Engine::Importer::ShaderImporter::linkShaderProgram(std::vector<GLuint> s
     return handler;
 }
 
-Engine::Importer::ShaderImporter::ShaderImporterType Engine::Importer::ShaderImporter::import(std::filesystem::path path_to_config)
+ObscureEngine::Importer::ShaderImporter::ShaderImporterType ObscureEngine::Importer::ShaderImporter::import(std::filesystem::path path_to_config)
 {
     using json = nlohmann::json;
     std::ifstream f(path_to_config / "config.json");

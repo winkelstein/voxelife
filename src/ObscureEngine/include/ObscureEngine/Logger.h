@@ -9,7 +9,7 @@
 #include <atomic>
 #include <ctime>
 
-namespace Engine
+namespace ObscureEngine
 {
     class Logger
     {

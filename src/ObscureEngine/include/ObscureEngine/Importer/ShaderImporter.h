@@ -2,7 +2,7 @@
 #include "Importer.h"
 #include "../GLTK/Shader.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace Importer
     {

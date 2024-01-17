@@ -9,7 +9,7 @@
 #include "GLTK/UniformBuffer.h"
 #include "GLTK/Shader.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     struct MVP
     {

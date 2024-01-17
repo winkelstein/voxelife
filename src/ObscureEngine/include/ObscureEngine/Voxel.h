@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "drawable.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     class Voxel : public drawable
     {
@@ -50,9 +50,9 @@ namespace Engine
     };
 }
 
-GLuint Engine::Voxel::VAO = 0;
+GLuint ObscureEngine::Voxel::VAO = 0;
 
-inline std::vector<float> Engine::Voxel::__get_model_vertices()
+inline std::vector<float> ObscureEngine::Voxel::__get_model_vertices()
 {
     std::vector<float> vertices = {
         -0.5f, -0.5f, 0.5f, // 0
@@ -101,7 +101,7 @@ inline std::vector<float> Engine::Voxel::__get_model_vertices()
     return vertices;
 }
 
-inline glm::vec3 Engine::Voxel::__get_model_vertex(size_t index) const
+inline glm::vec3 ObscureEngine::Voxel::__get_model_vertex(size_t index) const
 {
     std::vector<float> vertices = Voxel::__get_model_vertices();
 

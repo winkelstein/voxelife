@@ -7,7 +7,7 @@
 #include "Logger.h"
 #include "Player.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     class EngineApp
     {

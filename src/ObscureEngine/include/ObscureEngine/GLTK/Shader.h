@@ -9,7 +9,7 @@
 #include "GLObject.h"
 #include "../Importer/Importer.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace gltk
     {
@@ -58,7 +58,7 @@ namespace Engine
 }
 
 template <>
-inline void Engine::gltk::Shader::uniform<int>(std::string name, int data)
+inline void ObscureEngine::gltk::Shader::uniform<int>(std::string name, int data)
 {
     Uniform u = this->findUniform(name);
     if (u.type == GL_INT)
@@ -66,7 +66,7 @@ inline void Engine::gltk::Shader::uniform<int>(std::string name, int data)
 }
 
 template <>
-inline void Engine::gltk::Shader::uniform<float>(std::string name, float data)
+inline void ObscureEngine::gltk::Shader::uniform<float>(std::string name, float data)
 {
     Uniform u = this->findUniform(name);
     if (u.type == GL_FLOAT)
@@ -74,7 +74,7 @@ inline void Engine::gltk::Shader::uniform<float>(std::string name, float data)
 }
 
 template <>
-inline void Engine::gltk::Shader::uniform<glm::vec3>(std::string name, glm::vec3 data)
+inline void ObscureEngine::gltk::Shader::uniform<glm::vec3>(std::string name, glm::vec3 data)
 {
     Uniform u = this->findUniform(name);
     if (u.type == GL_FLOAT_VEC3)
@@ -82,7 +82,7 @@ inline void Engine::gltk::Shader::uniform<glm::vec3>(std::string name, glm::vec3
 }
 
 template <>
-inline void Engine::gltk::Shader::uniform<glm::vec4>(std::string name, glm::vec4 data)
+inline void ObscureEngine::gltk::Shader::uniform<glm::vec4>(std::string name, glm::vec4 data)
 {
     Uniform u = this->findUniform(name);
     if (u.type == GL_FLOAT_VEC4)
@@ -90,7 +90,7 @@ inline void Engine::gltk::Shader::uniform<glm::vec4>(std::string name, glm::vec4
 }
 
 template <>
-inline void Engine::gltk::Shader::uniform<glm::mat4>(std::string name, glm::mat4 data)
+inline void ObscureEngine::gltk::Shader::uniform<glm::mat4>(std::string name, glm::mat4 data)
 {
     Uniform u = this->findUniform(name);
     if (u.type == GL_FLOAT_MAT4)

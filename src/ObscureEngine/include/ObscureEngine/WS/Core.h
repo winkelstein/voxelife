@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace WS
     {

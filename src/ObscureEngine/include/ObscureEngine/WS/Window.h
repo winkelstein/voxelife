@@ -7,7 +7,7 @@
 
 #include "Event.hpp"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace WS
     {
@@ -40,26 +40,26 @@ namespace Engine
     }
 }
 
-Engine::WS::Size Engine::WS::Window::size() const
+ObscureEngine::WS::Size ObscureEngine::WS::Window::size() const
 {
     int width, height;
     glfwGetWindowSize(this->window, &width, &height);
     return Size(width, height);
 }
 
-Engine::WS::Position Engine::WS::Window::position() const
+ObscureEngine::WS::Position ObscureEngine::WS::Window::position() const
 {
     int x, y;
     glfwGetWindowPos(this->window, &x, &y);
     return Position(x, y);
 }
 
-void Engine::WS::Window::position(const Position position)
+void ObscureEngine::WS::Window::position(const Position position)
 {
     glfwSetWindowPos(this->window, position.x, position.y);
 }
 
-void Engine::WS::Window::close()
+void ObscureEngine::WS::Window::close()
 {
     glfwSetWindowShouldClose(this->window, GLFW_TRUE);
 }

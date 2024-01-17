@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/Screen.h"
 #include <cstring>
 
-Engine::Screen::Screen(const WS::Size size)
+ObscureEngine::Screen::Screen(const WS::Size size)
 {
     glViewport(0, 0, size.width, size.height);
     std::memset(&this->mvp, 0, sizeof(MVP));
@@ -13,7 +13,7 @@ Engine::Screen::Screen(const WS::Size size)
     this->ubo.data(&this->mvp);
 }
 
-void Engine::Screen::render()
+void ObscureEngine::Screen::render()
 {
     std::lock_guard lock(this->mtx);
     this->ubo.bind();
@@ -26,13 +26,13 @@ void Engine::Screen::render()
     }
 }
 
-void Engine::Screen::push(const drawable *object, gltk::Shader &shader)
+void ObscureEngine::Screen::push(const drawable *object, gltk::Shader &shader)
 {
     std::lock_guard lock(this->mtx);
     this->qDraw.push(std::pair<const drawable *, gltk::Shader &>(object, shader));
 }
 
-void Engine::Screen::resize(const WS::Size size)
+void ObscureEngine::Screen::resize(const WS::Size size)
 {
     if ((size.width && size.height) > 0)
     {
@@ -41,7 +41,7 @@ void Engine::Screen::resize(const WS::Size size)
     }
 }
 
-void Engine::Screen::onUpdateCamera(const Camera &cam)
+void ObscureEngine::Screen::onUpdateCamera(const Camera &cam)
 {
     this->mvp.camera_view = cam.view();
 }

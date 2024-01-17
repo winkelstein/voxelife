@@ -2,7 +2,7 @@
 #include "Core.h"
 #include "Window.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace WS
     {

@@ -4,7 +4,7 @@
 #include "WS/Mouse.hpp"
 #include "WS/Keyboard.hpp"
 
-namespace Engine
+namespace ObscureEngine
 {
     class Player
     {
@@ -29,6 +29,6 @@ namespace Engine
         virtual void process(double ticks);
 
     public:
-        inline const Engine::Camera &camera() const { return this->m_camera; }
+        inline const Camera &camera() const { return this->m_camera; }
     };
 }

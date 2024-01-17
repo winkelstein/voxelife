@@ -1,7 +1,7 @@
 #pragma once
 #include "GLObject.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace gltk
     {
@@ -25,7 +25,7 @@ namespace Engine
 }
 
 template <typename _Ty>
-inline Engine::gltk::UniformBuffer<_Ty>::UniformBuffer()
+inline ObscureEngine::gltk::UniformBuffer<_Ty>::UniformBuffer()
 {
     glGenBuffers(1, &this->handler);
     glBindBuffer(GL_UNIFORM_BUFFER, this->handler);
@@ -33,25 +33,25 @@ inline Engine::gltk::UniformBuffer<_Ty>::UniformBuffer()
 }
 
 template <typename _Ty>
-inline Engine::gltk::UniformBuffer<_Ty>::~UniformBuffer()
+inline ObscureEngine::gltk::UniformBuffer<_Ty>::~UniformBuffer()
 {
     glDeleteBuffers(1, &this->handler);
 }
 
 template <typename _Ty>
-inline void Engine::gltk::UniformBuffer<_Ty>::data(const _Ty *data)
+inline void ObscureEngine::gltk::UniformBuffer<_Ty>::data(const _Ty *data)
 {
     glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(_Ty), data);
 }
 
 template <typename _Ty>
-inline void Engine::gltk::UniformBuffer<_Ty>::bindBase(const unsigned int base) const
+inline void ObscureEngine::gltk::UniformBuffer<_Ty>::bindBase(const unsigned int base) const
 {
     glBindBufferBase(GL_UNIFORM_BUFFER, base, this->handler);
 }
 
 template <typename _Ty>
-inline void Engine::gltk::UniformBuffer<_Ty>::bind()
+inline void ObscureEngine::gltk::UniformBuffer<_Ty>::bind()
 {
     if (!this->_checkIsBinded())
     {
@@ -61,7 +61,7 @@ inline void Engine::gltk::UniformBuffer<_Ty>::bind()
 }
 
 template <typename _Ty>
-inline void Engine::gltk::UniformBuffer<_Ty>::unbind()
+inline void ObscureEngine::gltk::UniformBuffer<_Ty>::unbind()
 {
     if (this->_checkIsBinded())
     {
