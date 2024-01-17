@@ -50,8 +50,6 @@ namespace ObscureEngine
     };
 }
 
-GLuint ObscureEngine::Voxel::VAO = 0;
-
 inline std::vector<float> ObscureEngine::Voxel::__get_model_vertices()
 {
     std::vector<float> vertices = {

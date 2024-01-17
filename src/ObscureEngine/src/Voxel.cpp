@@ -2,6 +2,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "../include/ObscureEngine/Physics/Core.h"
 
+GLuint ObscureEngine::Voxel::VAO = 0;
+
 ObscureEngine::Voxel::Voxel(glm::vec4 color) : m_color(color), m_position(glm::vec3(0.0)), m_size(glm::vec3(1.0)), m_rotate(glm::vec3(0.0)), m_rotate_around_point(glm::vec3(0.0))
 {
     this->model = glm::translate(glm::mat4(1.0), glm::vec3(0.0f, 0.0f, 0.0f));
