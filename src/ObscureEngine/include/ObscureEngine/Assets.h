@@ -3,6 +3,7 @@
 #include <stdexcept>
 
 #include "GLTK/Shader.h"
+#include "Model.h"
 
 namespace ObscureEngine
 {
@@ -10,6 +11,7 @@ namespace ObscureEngine
     {
     private:
         std::unordered_map<std::string, std::shared_ptr<gltk::Shader>> shaders;
+        std::unordered_map<std::string, std::shared_ptr<Model>> models;
 
     public:
         template <class _Ty>
@@ -33,4 +35,19 @@ inline const std::shared_ptr<ObscureEngine::gltk::Shader> ObscureEngine::Assets:
         return this->shaders[name];
     else
         throw std::runtime_error("Shader not found");
+}
+
+template <>
+inline void ObscureEngine::Assets::store(std::string name, std::shared_ptr<ObscureEngine::Model> object)
+{
+    this->models[name] = object;
+}
+
+template <>
+inline const std::shared_ptr<ObscureEngine::Model> ObscureEngine::Assets::get(std::string name)
+{
+    if (this->models.find(name) != this->models.end())
+        return this->models[name];
+    else
+        throw std::runtime_error("Model not found");
 }
