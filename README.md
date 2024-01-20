@@ -1,4 +1,4 @@
-# voxelife
+# voxelife [PROJECT IN STATUS PROGRESS]
 
 Voxel Game Engine for learning neural networks in the virtual environment.
 

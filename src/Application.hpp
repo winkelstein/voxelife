@@ -20,10 +20,12 @@
 #include <ObscureEngine/Importer/ModelImporter.h>
 
 const std::string SHADER_PATH = "shaders/";
+const std::string MODEL_PATH = "models/";
 
 using ObscureEngine::Assets;
 using ObscureEngine::FPSCounter;
 using ObscureEngine::Logger;
+using ObscureEngine::Model;
 using ObscureEngine::gltk::Shader;
 
 class Application : public ObscureEngine::EngineApp
@@ -60,11 +62,17 @@ void Application::assets_init()
 {
     using namespace ObscureEngine::Importer;
     ShaderImporter shader_importer;
-    auto shader_data = shader_importer.import(SHADER_PATH + "/default/");
-    std::string shader_name = shader_data.first;
+    ModelImporter model_importer;
 
-    this->assets.store(shader_name, shader_data.second);
-    this->logger << Logger::message("Assets", shader_name + " shader has been imported successfully");
+    // Default shader
+    auto shader_data = shader_importer.import(SHADER_PATH + "/default/");
+    this->assets.store(shader_data.first, shader_data.second);
+    this->logger << Logger::message("Assets", shader_data.first + " shader has been imported successfully");
+
+    // Deer model
+    auto model_data = model_importer.import(MODEL_PATH + "/deer/");
+    this->assets.store(model_data.first, model_data.second);
+    this->logger << Logger::message("Assets", model_data.first + " model has been imported successfully");
 }
 
 Application::~Application()
@@ -73,7 +81,6 @@ Application::~Application()
 
 void Application::run()
 {
-    using ObscureEngine::Importer::ModelImporter;
     using ObscureEngine::WS::Event;
     using ObscureEngine::WS::Keyboard;
 
@@ -81,15 +88,10 @@ void Application::run()
     FPSCounter counter;
 
     std::shared_ptr<Shader> default_shader = this->assets.get<std::shared_ptr<Shader>>("default");
-    ObscureEngine::Voxel grass0(glm::vec4(sin(0), 0.46, 0.23, 1.0));
-
-    ModelImporter modelImporter;
-
-    auto t = modelImporter.import("models/deer");
-
-    auto model = t.second;
+    std::shared_ptr<Model> deer_model = this->assets.get<std::shared_ptr<Model>>("deer");
 
     default_shader->bind();
+
     while (this->window->isOpen())
     {
         counter.start();
@@ -99,8 +101,7 @@ void Application::run()
         this->player->process(counter.ticks());
         this->screen->on_update_camera(this->player->camera());
 
-        this->screen->push(&grass0, *default_shader);
-        this->screen->push(model.get(), *default_shader);
+        this->screen->push(deer_model.get(), *default_shader);
 
         draw();
 
