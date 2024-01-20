@@ -90,6 +90,9 @@ void Application::run()
     std::shared_ptr<Shader> default_shader = this->assets.get<std::shared_ptr<Shader>>("default");
     std::shared_ptr<Model> deer_model = this->assets.get<std::shared_ptr<Model>>("deer");
 
+    deer_model->position(glm::vec3(0.0, -10.0, 0.0));
+    deer_model->size(glm::vec3(0.1, 0.1, 0.1));
+
     default_shader->bind();
 
     while (this->window->isOpen())
