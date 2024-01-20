@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/WS/Window.h"
 #include <stdexcept>
 
-Engine::WS::Window::Window(std::string window_name, int width, int height)
+ObscureEngine::WS::Window::Window(std::string window_name, int width, int height)
 {
     if (!glfwInit())
     {
@@ -31,17 +31,17 @@ Engine::WS::Window::Window(std::string window_name, int width, int height)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-Engine::WS::Window::~Window()
+ObscureEngine::WS::Window::~Window()
 {
     glfwTerminate();
 }
 
-void Engine::WS::Window::swapBuffers()
+void ObscureEngine::WS::Window::swap_buffers()
 {
     glfwSwapBuffers(this->window);
 }
 
-void Engine::WS::Window::pollEvent(Event &ev)
+void ObscureEngine::WS::Window::poll_event(Event &ev)
 {
     glfwPollEvents();
 }

@@ -4,7 +4,7 @@
 
 #include "GLTK/Shader.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     class Assets
     {
@@ -21,13 +21,13 @@ namespace Engine
 }
 
 template <>
-inline void Engine::Assets::store(std::string name, std::shared_ptr<Engine::gltk::Shader> object)
+inline void ObscureEngine::Assets::store(std::string name, std::shared_ptr<ObscureEngine::gltk::Shader> object)
 {
     this->shaders[name] = object;
 }
 
 template <>
-inline const std::shared_ptr<Engine::gltk::Shader> Engine::Assets::get(std::string name)
+inline const std::shared_ptr<ObscureEngine::gltk::Shader> ObscureEngine::Assets::get(std::string name)
 {
     if (this->shaders.find(name) != this->shaders.end())
         return this->shaders[name];

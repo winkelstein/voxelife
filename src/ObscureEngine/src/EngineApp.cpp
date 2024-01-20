@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/EngineApp.h"
 #include "../include/ObscureEngine/FPSCounter.h"
 
-Engine::EngineApp::EngineApp(std::string window_name, int width, int height, int x, int y)
+ObscureEngine::EngineApp::EngineApp(std::string window_name, int width, int height, int x, int y)
 {
     try
     {
@@ -19,21 +19,21 @@ Engine::EngineApp::EngineApp(std::string window_name, int width, int height, int
     this->player = std::unique_ptr<Player>(new Player());
 }
 
-Engine::EngineApp::~EngineApp()
+ObscureEngine::EngineApp::~EngineApp()
 {
     this->logger << Logger::message("Obscure Engine", "Closing session");
     this->logger.flush();
 }
 
-void Engine::EngineApp::window_init(std::string name, int width, int height)
+void ObscureEngine::EngineApp::window_init(std::string name, int width, int height)
 {
     this->window = std::unique_ptr<WS::Window>(new WS::Window(name, width, height));
     this->screen = std::unique_ptr<Screen>(new Screen(WS::Size(width, height)));
 }
 
-void Engine::EngineApp::_debugfunc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char *message, const void *classptr)
+void ObscureEngine::EngineApp::_debugfunc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char *message, const void *classptr)
 {
-    Logger *logger = (Engine::Logger *)classptr;
+    Logger *logger = (Logger *)classptr;
 
     Logger::severity sev;
     switch (severity)
@@ -55,7 +55,7 @@ void Engine::EngineApp::_debugfunc(unsigned int source, unsigned int type, unsig
     *logger << Logger::message("OpenGL", message, sev);
 }
 
-/*void Engine::EngineApp::run()
+/*void ObscureEngine::EngineApp::run()
 {
 
     FPSCounter counter;

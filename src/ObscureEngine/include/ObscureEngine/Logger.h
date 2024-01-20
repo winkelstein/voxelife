@@ -9,7 +9,7 @@
 #include <atomic>
 #include <ctime>
 
-namespace Engine
+namespace ObscureEngine
 {
     class Logger
     {
@@ -42,7 +42,7 @@ namespace Engine
 
         std::atomic<bool> isWorking;
 
-        inline std::tm currentTime()
+        inline std::tm current_time()
         {
             std::time_t time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
             std::tm *now = std::localtime(&time);

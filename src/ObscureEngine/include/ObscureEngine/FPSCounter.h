@@ -1,7 +1,7 @@
 #pragma once
 #include <chrono>
 
-namespace Engine
+namespace ObscureEngine
 {
     class FPSCounter
     {

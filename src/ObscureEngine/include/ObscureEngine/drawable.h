@@ -4,7 +4,7 @@
 #include "GLTK/Shader.h"
 #include "Renderer.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     class drawable
     {

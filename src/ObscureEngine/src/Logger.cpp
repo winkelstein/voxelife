@@ -8,7 +8,7 @@
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
 
-void Engine::Logger::flush()
+void ObscureEngine::Logger::flush()
 {
     while (!this->qMessages.empty())
     {
@@ -17,9 +17,9 @@ void Engine::Logger::flush()
     }
 }
 
-void Engine::Logger::out(const message &msg)
+void ObscureEngine::Logger::out(const message &msg)
 {
-    std::tm now = this->currentTime();
+    std::tm now = this->current_time();
 
     std::lock_guard<std::recursive_mutex> lock(this->mtx);
     static std::ofstream outputfile("debug.log");

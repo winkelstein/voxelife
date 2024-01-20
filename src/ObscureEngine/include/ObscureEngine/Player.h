@@ -4,7 +4,7 @@
 #include "WS/Mouse.hpp"
 #include "WS/Keyboard.hpp"
 
-namespace Engine
+namespace ObscureEngine
 {
     class Player
     {
@@ -23,12 +23,12 @@ namespace Engine
         Player() : speed(5.0), velocity(glm::vec3(0.0)), sensitive(0.1) {}
 
     public:
-        virtual void onMouseInput(const WS::Window &win);
-        virtual void onKeyboardInput(const WS::Window &win);
+        virtual void on_mouse_input(const WS::Window &win);
+        virtual void on_keyboard_input(const WS::Window &win);
 
         virtual void process(double ticks);
 
     public:
-        inline const Engine::Camera &camera() const { return this->m_camera; }
+        inline const Camera &camera() const { return this->m_camera; }
     };
 }

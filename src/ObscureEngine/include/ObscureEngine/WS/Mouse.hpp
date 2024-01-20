@@ -2,7 +2,7 @@
 #include "Core.h"
 #include "Window.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace WS
     {
@@ -17,8 +17,8 @@ namespace Engine
             };
 
         public:
-            inline static bool isButtonPressed(const Window &win, const MouseButton button);
-            inline static bool isButtonReleased(const Window &win, const MouseButton button);
+            inline static bool is_button_pressed(const Window &win, const MouseButton button);
+            inline static bool is_button_released(const Window &win, const MouseButton button);
             inline static Position position(const Window &win);
 
             inline static void position(const Window &win, const Position pos);
@@ -28,19 +28,19 @@ namespace Engine
     }
 }
 
-bool Engine::WS::Mouse::isButtonPressed(const Window &win, const MouseButton button)
+bool ObscureEngine::WS::Mouse::is_button_pressed(const Window &win, const MouseButton button)
 {
     int state = glfwGetMouseButton(win.__get_native_handler(), (int)button);
     return state == GLFW_PRESS;
 }
 
-bool Engine::WS::Mouse::isButtonReleased(const Window &win, const MouseButton button)
+bool ObscureEngine::WS::Mouse::is_button_released(const Window &win, const MouseButton button)
 {
     int state = glfwGetMouseButton(win.__get_native_handler(), (int)button);
     return state == GLFW_RELEASE;
 }
 
-Engine::WS::Position Engine::WS::Mouse::position(const Window &win)
+ObscureEngine::WS::Position ObscureEngine::WS::Mouse::position(const Window &win)
 {
     double xpos, ypos;
     glfwGetCursorPos(win.__get_native_handler(), &xpos, &ypos);
@@ -50,12 +50,12 @@ Engine::WS::Position Engine::WS::Mouse::position(const Window &win)
     return Position(xpos, ypos);
 }
 
-void Engine::WS::Mouse::position(const Window &win, const Position pos)
+void ObscureEngine::WS::Mouse::position(const Window &win, const Position pos)
 {
     glfwSetCursorPos(win.__get_native_handler(), pos.x, pos.y);
 }
 
-void Engine::WS::Mouse::visibility(const Window &win, bool state)
+void ObscureEngine::WS::Mouse::visibility(const Window &win, bool state)
 {
     if (state)
         glfwSetInputMode(win.__get_native_handler(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);

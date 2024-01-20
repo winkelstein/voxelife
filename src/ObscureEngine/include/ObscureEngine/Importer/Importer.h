@@ -4,7 +4,7 @@
 #include <tuple>
 #include <string>
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace Importer
     {

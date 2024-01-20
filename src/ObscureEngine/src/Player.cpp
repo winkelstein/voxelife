@@ -1,7 +1,7 @@
 #include "../include/ObscureEngine/Player.h"
 #include "../include/ObscureEngine/Physics/Core.h"
 
-void Engine::Player::move(glm::vec3 velocity)
+void ObscureEngine::Player::move(glm::vec3 velocity)
 {
     glm::vec3 position = this->m_camera.position();
     glm::vec3 front = this->m_camera.front();
@@ -16,9 +16,9 @@ void Engine::Player::move(glm::vec3 velocity)
     this->m_camera.position(position);
 }
 
-void Engine::Player::onMouseInput(const Engine::WS::Window &win)
+void ObscureEngine::Player::on_mouse_input(const ObscureEngine::WS::Window &win)
 {
-    using Engine::WS::Mouse;
+    using ObscureEngine::WS::Mouse;
 
     static float pitch, yaw;
 
@@ -36,19 +36,19 @@ void Engine::Player::onMouseInput(const Engine::WS::Window &win)
     this->m_camera.rotate(glm::radians(yaw), glm::radians(pitch));
 }
 
-void Engine::Player::onKeyboardInput(const Engine::WS::Window &win)
+void ObscureEngine::Player::on_keyboard_input(const ObscureEngine::WS::Window &win)
 {
-    using Engine::WS::Keyboard;
+    using ObscureEngine::WS::Keyboard;
 
-    this->velocity.x = ((1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::W) + (-1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::S))));
-    this->velocity.z = ((1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::D) + (-1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::A))));
-    this->velocity.y = ((1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::Space)) + (-1.0 * Keyboard::isButtonPressed(win, Keyboard::VirtualKey::LeftCtrl)));
+    this->velocity.x = ((1.0 * Keyboard::is_button_pressed(win, Keyboard::VirtualKey::W) + (-1.0 * Keyboard::is_button_pressed(win, Keyboard::VirtualKey::S))));
+    this->velocity.z = ((1.0 * Keyboard::is_button_pressed(win, Keyboard::VirtualKey::D) + (-1.0 * Keyboard::is_button_pressed(win, Keyboard::VirtualKey::A))));
+    this->velocity.y = ((1.0 * Keyboard::is_button_pressed(win, Keyboard::VirtualKey::Space)) + (-1.0 * Keyboard::is_button_pressed(win, Keyboard::VirtualKey::LeftCtrl)));
 
-    if (Keyboard::isButtonPressed(win, Keyboard::VirtualKey::LeftShift))
+    if (Keyboard::is_button_pressed(win, Keyboard::VirtualKey::LeftShift))
         this->velocity *= 2;
 }
 
-void Engine::Player::process(double ticks)
+void ObscureEngine::Player::process(double ticks)
 {
     float speed = this->speed * ticks / Physics::constants::TICK_COEFF;
 

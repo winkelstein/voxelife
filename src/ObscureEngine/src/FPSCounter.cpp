@@ -1,13 +1,13 @@
 #include "../include/ObscureEngine/FPSCounter.h"
 
-Engine::FPSCounter::FPSCounter() : m_ticks(0.1) {}
+ObscureEngine::FPSCounter::FPSCounter() : m_ticks(0.1) {}
 
-void Engine::FPSCounter::start()
+void ObscureEngine::FPSCounter::start()
 {
     this->time = std::chrono::high_resolution_clock::now();
 }
 
-void Engine::FPSCounter::stop()
+void ObscureEngine::FPSCounter::stop()
 {
     auto end = std::chrono::high_resolution_clock::now();
 

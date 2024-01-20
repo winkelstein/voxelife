@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace utils
     {

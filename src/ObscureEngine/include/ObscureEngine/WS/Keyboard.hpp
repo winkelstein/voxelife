@@ -2,7 +2,7 @@
 #include "Core.h"
 #include "Window.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace WS
     {
@@ -101,19 +101,19 @@ namespace Engine
             };
 
         public:
-            inline static bool isButtonPressed(const Window &win, const VirtualKey key);
-            inline static bool isButtonReleased(const Window &win, const VirtualKey key);
+            inline static bool is_button_pressed(const Window &win, const VirtualKey key);
+            inline static bool is_button_released(const Window &win, const VirtualKey key);
         };
     }
 }
 
-bool Engine::WS::Keyboard::isButtonPressed(const Window &win, const VirtualKey key)
+bool ObscureEngine::WS::Keyboard::is_button_pressed(const Window &win, const VirtualKey key)
 {
     int state = glfwGetKey(win.__get_native_handler(), (int)key);
     return state == GLFW_PRESS;
 }
 
-bool Engine::WS::Keyboard::isButtonReleased(const Window &win, const VirtualKey key)
+bool ObscureEngine::WS::Keyboard::is_button_released(const Window &win, const VirtualKey key)
 {
     int state = glfwGetKey(win.__get_native_handler(), (int)key);
     return state == GLFW_RELEASE;

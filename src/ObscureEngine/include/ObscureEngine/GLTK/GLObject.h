@@ -1,7 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace gltk
     {
@@ -14,7 +14,7 @@ namespace Engine
             GLuint handler;
 
         protected:
-            inline bool _checkIsBinded() const { return this->isBinded; }
+            inline bool _check_is_binded() const { return this->isBinded; }
             void _bind() { this->isBinded = true; }
             void _unbind() { this->isBinded = false; }
 
