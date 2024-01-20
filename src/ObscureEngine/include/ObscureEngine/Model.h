@@ -5,7 +5,7 @@
 #include "Voxel.h"
 #include "GLTK/Shader.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     class Model : public drawable
     {

@@ -2,7 +2,7 @@
 #include "Importer.h"
 #include "../Model.h"
 
-namespace Engine
+namespace ObscureEngine
 {
     namespace Importer
     {
@@ -10,64 +10,42 @@ namespace Engine
         {
             using ModelImporterType = std::pair<std::string, std::shared_ptr<Model>>;
 
-            struct VoxColor
-            {
-                uint8_t red;
-                uint8_t green;
-                uint8_t blue;
-                uint8_t alpha;
-            };
-
-            struct VoxVoxel
-            {
-                uint8_t x;
-                uint8_t y;
-                uint8_t z;
-                uint8_t colorIndex;
-            };
-
-            struct VoxMainChunk
-            {
-                uint32_t sizeX;
-                uint32_t sizeY;
-                uint32_t sizeZ;
-                VoxVoxel *voxels;
-            };
-
-            struct VoxXYZIChunk
-            {
-                uint32_t voxelCount;
-                VoxVoxel *voxels;
-            };
-
-            struct VoxRGBAChunk
-            {
-                VoxColor *colors;
-            };
-
-            struct VoxFormat
-            {
-
-                struct VoxHeader
-                {
-                    char signature[4];
-                    uint32_t version;
-                } header;
-
-                VoxMainChunk mainChunk;
-                VoxXYZIChunk xyziChunk;
-                VoxRGBAChunk rgbaChunk;
-            };
-
+        private:
             struct Config
             {
                 std::string name;
                 std::filesystem::path model;
             };
 
-            VoxFormat *read_from_file(std::filesystem::path path_to_config);
-            std::shared_ptr<Model> parse_model(VoxFormat format);
-            Config parse_config(std::ifstream &config_file);
+        private:
+            struct SizeChunk
+            {
+                int32_t x, y, z;
+            };
+
+            struct VoxelFormat
+            {
+                unsigned char distance;
+                unsigned char color;
+                unsigned char shade;
+                unsigned char index;
+            };
+
+            struct VoxPos
+            {
+                int x, y, z, colorIndex;
+            };
+
+            struct VoxSize
+            {
+                int sizeX, sizeY, sizeZ;
+            };
+
+        private:
+            std::shared_ptr<Model> read_from_file(std::filesystem::path path_to_config);
+            std::shared_ptr<Model> parse_model(std::vector<VoxPos> positions, std::vector<VoxSize> sizes, std::vector<uint32_t> palette);
+            std::vector<uint32_t> load_palette(FILE *file, int total_size);
+            Config parse_config(std::filesystem::path path_to_config);
 
         public:
             ModelImporterType import(std::filesystem::path path_to_config);

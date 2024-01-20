@@ -33,10 +33,9 @@ ObscureEngine::Voxel::~Voxel()
 
 void ObscureEngine::Voxel::draw(gltk::Shader &shader) const
 {
-    shader.bind();
     shader.uniform<glm::mat4>("model", this->model);
     shader.uniform<glm::vec4>("color", this->m_color);
-    Renderer::render(this->VAO);
+    Renderer::render();
 }
 
 void ObscureEngine::Voxel::position(glm::vec3 position)

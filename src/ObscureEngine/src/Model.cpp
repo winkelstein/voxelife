@@ -1,11 +1,11 @@
 #include "../include/ObscureEngine/Model.h"
 
-Engine::Model::Model(std::vector<std::shared_ptr<Voxel>> voxels)
+ObscureEngine::Model::Model(std::vector<std::shared_ptr<Voxel>> voxels)
 {
     this->voxels = voxels;
 }
 
-void Engine::Model::draw(Engine::gltk::Shader &shader) const
+void ObscureEngine::Model::draw(ObscureEngine::gltk::Shader &shader) const
 {
     shader.bind();
     for (auto &t : this->voxels)

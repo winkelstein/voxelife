@@ -6,9 +6,8 @@ namespace ObscureEngine
     class Renderer
     {
     public:
-        static void render(GLuint VAO)
+        static void render()
         {
-            glBindVertexArray(VAO);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
     };

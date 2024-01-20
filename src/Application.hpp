@@ -17,6 +17,8 @@
 #include <ObscureEngine/Voxel.h>
 #include <ObscureEngine/Physics/Core.h>
 
+#include <ObscureEngine/Importer/ModelImporter.h>
+
 const std::string SHADER_PATH = "shaders/";
 
 using ObscureEngine::Assets;
@@ -71,23 +73,23 @@ Application::~Application()
 
 void Application::run()
 {
-    ObscureEngine::WS::Event ev;
+    using ObscureEngine::Importer::ModelImporter;
+    using ObscureEngine::WS::Event;
+    using ObscureEngine::WS::Keyboard;
+
+    Event ev;
     FPSCounter counter;
 
     std::shared_ptr<Shader> default_shader = this->assets.get<std::shared_ptr<Shader>>("default");
-    ObscureEngine::Voxel grass(glm::vec4(0.24, 0.46, 0.23, 1.0));
-    ObscureEngine::Voxel tree(glm::vec4(101.0 / 255.0, 67 / 255.0, 33 / 255.0, 1.0));
-    ObscureEngine::Voxel leaves(glm::vec4(0.0, 1.0, 0.0, 1.0));
-    grass.position(glm::vec3(0.0f, -3.0f, 0));
-    tree.position(glm::vec3(0.0f, -1.45, 0));
-    leaves.position(glm::vec3(0.0f, -0.5, 0));
+    ObscureEngine::Voxel grass0(glm::vec4(sin(0), 0.46, 0.23, 1.0));
 
-    grass.size(glm::vec3(15.0f, 0.1f, 15.0f));
-    tree.size(glm::vec3(0.5, 3.0, 0.5));
-    leaves.size(glm::vec3(2.0, 0.25, 0.1));
+    ModelImporter modelImporter;
 
-    // grass.rotate(glm::vec3(1.0, 0.0, 0.0), glm::vec3(30.0, 0.0, 0.0));
+    auto t = modelImporter.import("models/deer");
 
+    auto model = t.second;
+
+    default_shader->bind();
     while (this->window->isOpen())
     {
         counter.start();
@@ -97,13 +99,12 @@ void Application::run()
         this->player->process(counter.ticks());
         this->screen->on_update_camera(this->player->camera());
 
-        this->screen->push(&grass, *default_shader);
-        this->screen->push(&tree, *default_shader);
-        this->screen->push(&leaves, *default_shader);
+        this->screen->push(&grass0, *default_shader);
+        this->screen->push(model.get(), *default_shader);
 
         draw();
 
-        if (ObscureEngine::WS::Keyboard::is_button_pressed(*this->window, ObscureEngine::WS::Keyboard::VirtualKey::ESC))
+        if (Keyboard::is_button_pressed(*this->window, Keyboard::VirtualKey::ESC))
             this->window->close();
 
         this->window->swap_buffers();
@@ -122,7 +123,10 @@ void Application::draw()
 
 void Application::handle_event()
 {
+    using ObscureEngine::WS::Mouse;
+    using ObscureEngine::WS::Position;
+
     this->player->on_mouse_input(*this->window);
-    ObscureEngine::WS::Mouse::position(*this->window, ObscureEngine::WS::Position(this->window->size().width / 2.0, this->window->size().height / 2.0));
+    Mouse::position(*this->window, Position(this->window->size().width / 2.0, this->window->size().height / 2.0));
     this->player->on_keyboard_input(*this->window);
 }
