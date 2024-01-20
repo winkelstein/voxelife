@@ -73,6 +73,11 @@ void Application::assets_init()
     auto model_data = model_importer.import(MODEL_PATH + "/deer/");
     this->assets.store(model_data.first, model_data.second);
     this->logger << Logger::message("Assets", model_data.first + " model has been imported successfully");
+
+    // Monument model
+    model_data = model_importer.import(MODEL_PATH + "/monument/");
+    this->assets.store(model_data.first, model_data.second);
+    this->logger << Logger::message("Assets", model_data.first + " model has been imported successfully");
 }
 
 Application::~Application()
